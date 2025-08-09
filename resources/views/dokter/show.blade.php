@@ -33,20 +33,20 @@
                         <div class="row mb-3">
                             <div class="col-sm-4 font-weight-bold">Nama Jenis Kelamin</div>
                             <div class="col-sm-8">
-                                {{ $dokter->pimpinan && $dokter->pimpinan->jenis_kelamin == 'L' ? 'Laki-Laki' : ($dokter->pimpinan && $dokter->pimpinan->jenis_kelamin == 'P' ? 'Perempuan' : "Data belum di isi") }}
+                                {{ $dokter->dokter && $dokter->dokter->jenis_kelamin == 'L' ? 'Laki-Laki' : ($dokter->dokter && $dokter->dokter->jenis_kelamin == 'P' ? 'Perempuan' : "Data belum di isi") }}
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-4 font-weight-bold">Tempat Lahir</div>
-                            <div class="col-sm-8">{{ $dokter->pimpinan->tempat_lahir ?? "Data belum di isi" }}</div>
+                            <div class="col-sm-8">{{ $dokter->dokter->tempat_lahir ?? "Data belum di isi" }}</div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-4 font-weight-bold">Tanggal Lahir</div>
-                            <div class="col-sm-8">{{ $dokter->pimpinan->tanggal_lahir ?? "Data belum di isi" }}</div>
+                            <div class="col-sm-8">{{ $dokter->dokter->tanggal_lahir ?? "Data belum di isi" }}</div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-4 font-weight-bold">Alamat</div>
-                            <div class="col-sm-8">{{ $dokter->pimpinan->alamat ?? "Data belum di isi" }}</div>
+                            <div class="col-sm-8">{{ $dokter->dokter->alamat ?? "Data belum di isi" }}</div>
                         </div>
                     </div>
                 </div>
