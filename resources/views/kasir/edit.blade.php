@@ -1,12 +1,12 @@
 @extends('template')
-@section('title', 'Tambah Kasir')
-@section('header', 'Tambah Kasir')
+@section('title', 'Edit Kasir')
+@section('header', 'Edit Kasir')
 @section('body')
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Form Tambah Kasir</h4>
+                    <h4>Form Edit Kasir</h4>
                 </div>
                 @if($errors->has('error'))
                     <div class="alert alert-danger">
@@ -14,36 +14,36 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <form action="{{ route('kasir.store') }}" method="POST">
+                    <form action="{{ route('kasir.update', $kasir->id) }}" method="POST">
                         @csrf
-                        @method('POST')
+                        @method('PUT')
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" required>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username', $kasir->username) }}" required>
                             @error('username')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $kasir->email) }}" required>
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
                             @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation">Konfirmasi Password</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
                             <a href="{{ route('kasir.index') }}" class="btn btn-secondary">Kembali</a>
                         </div>
                     </form>

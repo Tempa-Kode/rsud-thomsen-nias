@@ -1,12 +1,12 @@
 @extends('template')
-@section('title', 'Tambah Kasir')
-@section('header', 'Tambah Kasir')
+@section('title', 'Tambah Dokter')
+@section('header', 'Tambah Dokter')
 @section('body')
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Form Tambah Kasir</h4>
+                    <h4>Form Tambah Dokter</h4>
                 </div>
                 @if($errors->has('error'))
                     <div class="alert alert-danger">
@@ -14,7 +14,7 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <form action="{{ route('kasir.store') }}" method="POST">
+                    <form action="{{ route('dokter.store') }}" method="POST">
                         @csrf
                         @method('POST')
                         <div class="form-group">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>
-                            <a href="{{ route('kasir.index') }}" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('dokter.index') }}" class="btn btn-secondary">Kembali</a>
                         </div>
                     </form>
                 </div>
