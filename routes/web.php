@@ -11,3 +11,4 @@ Route::prefix('/pengguna')->middleware(['auth'])->group(function () {
     Route::resource('superadmin', \App\Http\Controllers\SuperAdminController::class)->names('superadmin');
     Route::resource('pimpinan', \App\Http\Controllers\PimpinanController::class)->names('pimpinan');
 });
+Route::resource('poli', \App\Http\Controllers\PoliController::class)->middleware(['auth'])->names('poli');
