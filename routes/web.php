@@ -9,4 +9,5 @@ Route::get('/register', [\App\Http\Controllers\AuthController::class, 'pendaftar
 Route::get('/dashboard', [\App\Http\Controllers\AuthController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 Route::prefix('/pengguna')->middleware(['auth'])->group(function () {
     Route::resource('superadmin', \App\Http\Controllers\SuperAdminController::class)->names('superadmin');
+    Route::resource('pimpinan', \App\Http\Controllers\PimpinanController::class)->names('pimpinan');
 });
