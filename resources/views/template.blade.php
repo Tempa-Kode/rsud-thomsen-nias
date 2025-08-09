@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -82,20 +83,10 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <div class="col-12 mb-4">
-                        <div class="hero bg-primary text-white">
-                            <div class="hero-inner">
-                                <h2>Selamat Datang, {{ Auth::user()->username }}!</h2>
-                                <p class="lead">Anda hampir selesai, lengkapi informasi akun Anda untuk menyelesaikan pendaftaran.</p>
-                                <div class="mt-4">
-                                    <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i> Lengkapi Akun</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h1>@yield('header')</h1>
                 </div>
-
                 <div class="section-body">
+                    @yield('body')
                 </div>
             </section>
         </div>
@@ -116,6 +107,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
 <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
 <!-- JS Libraies -->
@@ -123,6 +115,11 @@
 <!-- Template JS File -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#datatable').DataTable();
+    });
+</script>
 
 <!-- Page Specific JS File -->
 </body>
