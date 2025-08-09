@@ -6,7 +6,7 @@
     <ul class="dropdown-menu">
         <li><a class="nav-link {{ Route::currentRouteName() == 'superadmin.index' ? 'text-primary' : '' }}" href="{{ route('superadmin.index') }}">Superadmin</a></li>
         <li><a class="nav-link {{ Route::currentRouteName() == 'pimpinan.index' ? 'text-primary' : '' }}" href="{{ route('pimpinan.index') }}">Pimpinan</a></li>
-        <li><a class="nav-link" href="">Dokter</a></li>
+        <li><a class="nav-link {{ Route::currentRouteName() == 'dokter.index' ? 'text-primary' : '' }}" href="{{ route('dokter.index') }}">Dokter</a></li>
         <li><a class="nav-link" href="">Kasir</a></li>
         <li><a class="nav-link" href="">Pasien</a></li>
     </ul>

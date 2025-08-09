@@ -10,4 +10,9 @@ class Poli extends Model
     protected $fillable = ['nama_poli', 'keterangan'];
     public $timestamps = false;
 
+    public function dokter()
+    {
+        return $this->hasMany(Dokter::class);
+    }
+
 }

@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Pimpinan::class);
     }
+
+    public function dokter()
+    {
+        return $this->hasOne(Dokter::class);
+    }
 }
