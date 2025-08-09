@@ -8,7 +8,7 @@
         <li><a class="nav-link {{ Route::currentRouteName() == 'pimpinan.index' ? 'text-primary' : '' }}" href="{{ route('pimpinan.index') }}">Pimpinan</a></li>
         <li><a class="nav-link {{ Route::currentRouteName() == 'dokter.index' ? 'text-primary' : '' }}" href="{{ route('dokter.index') }}">Dokter</a></li>
         <li><a class="nav-link {{ Route::currentRouteName() == 'kasir.index' ? 'text-primary' : '' }}" href="{{ route('kasir.index') }}">Kasir</a></li>
-        <li><a class="nav-link" href="">Pasien</a></li>
+        <li><a class="nav-link {{ Route::currentRouteName() == 'pasien.index' ? 'text-primary' : '' }}" href="{{ route('pasien.index') }}">Pasien</a></li>
     </ul>
 </li>
 <li class=""><a class="nav-link {{ Route::currentRouteName() == 'obat.index' ? 'text-primary' : '' }}" href="{{ route('obat.index') }}"><i class="fas fa-pills"></i> <span>Data Obat</span></a></li>
