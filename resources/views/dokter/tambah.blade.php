@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>
-                            <a href="{{ route('kasir.index') }}" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('dokter.index') }}" class="btn btn-secondary">Kembali</a>
                         </div>
                     </form>
                 </div>
