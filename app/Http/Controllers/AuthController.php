@@ -43,4 +43,8 @@ class AuthController extends Controller
         return view('dashboard');
     }
 
+    public function pendaftaranAkun() {
+        return view('auth.register');
+    }
+
 }

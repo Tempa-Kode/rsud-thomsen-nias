@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="mt-5 text-muted text-center">
-                        Tidak memiliki akun? <a href="">Daftar</a>
+                        Tidak memiliki akun? <a href="{{ route('register') }}">Daftar</a>
                     </div>
                     <div class="simple-footer">
                         Copyright &copy; RSUD Thomsen Nias 2025
