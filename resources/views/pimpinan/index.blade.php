@@ -35,7 +35,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->username }}</td>
-                                    <td>{{ $item->user->nama ?? "-" }}</td>
+                                    <td>{{ $item->pimpinan->nama ?? "-" }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td><div class="badge badge-success text-capitalize">{{ $item->role }}</div></td>
                                     <td>
