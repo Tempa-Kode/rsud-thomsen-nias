@@ -26,68 +26,6 @@
                     <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
                     <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
                 </ul>
-                <div class="search-element">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
-                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-                    <div class="search-backdrop"></div>
-                    <div class="search-result">
-                        <div class="search-header">
-                            Histories
-                        </div>
-                        <div class="search-item">
-                            <a href="#">How to hack NASA using CSS</a>
-                            <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-                        </div>
-                        <div class="search-item">
-                            <a href="#">Kodinger.com</a>
-                            <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-                        </div>
-                        <div class="search-item">
-                            <a href="#">#Stisla</a>
-                            <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-                        </div>
-                        <div class="search-header">
-                            Result
-                        </div>
-                        <div class="search-item">
-                            <a href="#">
-                                <img class="mr-3 rounded" width="30" src="{{ asset('assets/img/products/product-3-50.png') }}" alt="product">
-                                oPhone S9 Limited Edition
-                            </a>
-                        </div>
-                        <div class="search-item">
-                            <a href="#">
-                                <img class="mr-3 rounded" width="30" src="{{ asset('assets/img/products/product-2-50.png') }}" alt="product">
-                                Drone X2 New Gen-7
-                            </a>
-                        </div>
-                        <div class="search-item">
-                            <a href="#">
-                                <img class="mr-3 rounded" width="30" src="{{ asset('assets/img/products/product-1-50.png') }}" alt="product">
-                                Headphone Blitz
-                            </a>
-                        </div>
-                        <div class="search-header">
-                            Projects
-                        </div>
-                        <div class="search-item">
-                            <a href="#">
-                                <div class="search-icon bg-danger text-white mr-3">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                Stisla Admin Template
-                            </a>
-                        </div>
-                        <div class="search-item">
-                            <a href="#">
-                                <div class="search-icon bg-primary text-white mr-3">
-                                    <i class="fas fa-laptop"></i>
-                                </div>
-                                Create a new Homepage Design
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </form>
             <ul class="navbar-nav navbar-right">
                 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -121,46 +59,21 @@
                     <a href="index.html">RSUD Thomsen</a>
                 </div>
                 <div class="sidebar-brand sidebar-brand-sm">
-                    <a href="index.html">St</a>
+                    <a href="index.html">RST</a>
                 </div>
                 <ul class="sidebar-menu">
-                    <li class="menu-header">Dashboard</li>
-                    <li><a class="nav-link" href="credits.html"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
-                    <li class="menu-header">Starter</li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-                            <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                            <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-                        </ul>
-                    </li>
-                    <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="bootstrap-alert.html">Alert</a></li>
-                            <li><a class="nav-link" href="bootstrap-badge.html">Badge</a></li>
-                            <li><a class="nav-link" href="bootstrap-breadcrumb.html">Breadcrumb</a></li>
-                            <li><a class="nav-link" href="bootstrap-buttons.html">Buttons</a></li>
-                            <li><a class="nav-link" href="bootstrap-card.html">Card</a></li>
-                            <li><a class="nav-link" href="bootstrap-carousel.html">Carousel</a></li>
-                            <li><a class="nav-link" href="bootstrap-collapse.html">Collapse</a></li>
-                            <li><a class="nav-link" href="bootstrap-dropdown.html">Dropdown</a></li>
-                            <li><a class="nav-link" href="bootstrap-form.html">Form</a></li>
-                            <li><a class="nav-link" href="bootstrap-list-group.html">List Group</a></li>
-                            <li><a class="nav-link" href="bootstrap-media-object.html">Media Object</a></li>
-                            <li><a class="nav-link" href="bootstrap-modal.html">Modal</a></li>
-                            <li><a class="nav-link" href="bootstrap-nav.html">Nav</a></li>
-                            <li><a class="nav-link" href="bootstrap-navbar.html">Navbar</a></li>
-                            <li><a class="nav-link" href="bootstrap-pagination.html">Pagination</a></li>
-                            <li><a class="nav-link" href="bootstrap-popover.html">Popover</a></li>
-                            <li><a class="nav-link" href="bootstrap-progress.html">Progress</a></li>
-                            <li><a class="nav-link" href="bootstrap-table.html">Table</a></li>
-                            <li><a class="nav-link" href="bootstrap-tooltip.html">Tooltip</a></li>
-                            <li><a class="nav-link" href="bootstrap-typography.html">Typography</a></li>
-                        </ul>
-                    </li>
+                    @switch(Auth::user()->role)
+                        @case('superadmin')
+                            @include('komponen.menu.superadmin')
+                            @break
+                        @default
+                            <li class="menu-header">Dashboard</li>
+                            <li class="{{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('dashboard') }}"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                            </li>
+                            <li class="menu-header">Starter</li>
+                            <li class=""><a class
+                    @endswitch
                 </ul>
             </aside>
         </div>
@@ -169,7 +82,17 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Blank Page</h1>
+                    <div class="col-12 mb-4">
+                        <div class="hero bg-primary text-white">
+                            <div class="hero-inner">
+                                <h2>Selamat Datang, {{ Auth::user()->username }}!</h2>
+                                <p class="lead">Anda hampir selesai, lengkapi informasi akun Anda untuk menyelesaikan pendaftaran.</p>
+                                <div class="mt-4">
+                                    <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i> Lengkapi Akun</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="section-body">
