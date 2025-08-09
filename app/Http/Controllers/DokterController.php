@@ -97,8 +97,8 @@ class DokterController extends Controller
         DB::beginTransaction();
         try {
             $user = User::findOrFail($id);
-            if ($user->pimpinan) {
-                $user->pimpinan->delete();
+            if ($user->dokter) {
+                $user->dokter->delete();
             }
             $user->delete();
             DB::commit();
