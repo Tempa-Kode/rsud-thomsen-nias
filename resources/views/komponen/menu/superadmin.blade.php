@@ -11,5 +11,5 @@
         <li><a class="nav-link" href="">Pasien</a></li>
     </ul>
 </li>
-<li class=""><a class="nav-link" href=""><i class="fas fa-pills"></i> <span>Data Obat</span></a></li>
+<li class=""><a class="nav-link {{ Route::currentRouteName() == 'obat.index' ? 'text-primary' : '' }}" href="{{ route('obat.index') }}"><i class="fas fa-pills"></i> <span>Data Obat</span></a></li>
 <li class=""><a class="nav-link {{ Route::currentRouteName() == 'poli.index' ? 'text-primary' : '' }}" href="{{ route('poli.index') }}"><i class="far fa-solid fa-hospital"></i> <span>Data Poli</span></a></li>

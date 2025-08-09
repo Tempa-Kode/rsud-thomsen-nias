@@ -12,3 +12,4 @@ Route::prefix('/pengguna')->middleware(['auth'])->group(function () {
     Route::resource('pimpinan', \App\Http\Controllers\PimpinanController::class)->names('pimpinan');
 });
 Route::resource('poli', \App\Http\Controllers\PoliController::class)->middleware(['auth'])->names('poli');
+Route::resource('obat', \App\Http\Controllers\ObatController::class)->middleware(['auth'])->names('obat');
