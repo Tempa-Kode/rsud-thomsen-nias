@@ -6,6 +6,7 @@ Route::get('/', [\App\Http\Controllers\AuthController::class, 'login'])->name('l
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'prosesLogin'])->name('login.proses');
 Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [\App\Http\Controllers\AuthController::class, 'pendaftaranAkun'])->name('register');
+Route::post('/register', [\App\Http\Controllers\AuthController::class, 'prosesDaftar'])->name('proses.register');
 Route::get('/dashboard', [\App\Http\Controllers\AuthController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 Route::prefix('/pengguna')->middleware(['auth'])->group(function () {
     Route::resource('superadmin', \App\Http\Controllers\SuperAdminController::class)->names('superadmin');

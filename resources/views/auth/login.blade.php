@@ -33,6 +33,10 @@
                             <div class="alert alert-danger mx-3">
                                 {{ session('error') }}
                             </div>
+                        @else
+                            <div class="alert alert-success mx-3">
+                                {{ session('success') }}
+                            </div>
                         @endif
                         <div class="card-body">
                             <form method="POST" action="{{ route('login.proses') }}" class="needs-validation">
