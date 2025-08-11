@@ -23,8 +23,9 @@ class ProfileController extends Controller
         $relasiData = $data->$role;
         if ($role == 'dokter') {
             $poli = Poli::all();
+            return view('profil.index', compact('data', 'role', 'relasiData', 'poli'));
         }
-        return view('profil.index', compact('data', 'role', 'relasiData', 'poli'));
+        return view('profil.index', compact('data', 'role', 'relasiData'));
     }
 
     public function updateDataPasien(Request $request)
