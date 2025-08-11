@@ -42,7 +42,13 @@ class AuthController extends Controller
     }
 
     public function dashboard() {
-        return view('dashboard');
+        $data = User::where('id', Auth::user()->id)
+            ->with('pimpinan', 'dokter', 'kasir', 'pasien')
+            ->first();
+
+        $lengkapiDataAkun = isset($data->pasien) || isset($data->dokter) || isset($data->kasir) || isset($data->pimpinan);
+//        dd($lengkapiDataAkun);
+        return view('dashboard', compact('lengkapiDataAkun'));
     }
 
     public function pendaftaranAkun() {
