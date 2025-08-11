@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pasien;
+use App\Models\Pimpinan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +64,44 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('profile.index')->with('error', 'Gagal memperbarui data pasien: ' . $e->getMessage());
+        }
+    }
+
+    public function updateDataPimpinan(Request $request)
+    {
+        $data = $request->validate([
+            'nama' => 'required|string|max:50',
+            'jenis_kelamin' => 'required|in:L,P',
+            'tempat_lahir' => 'required|string|max:50',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'nullable|string'
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'jenis_kelamin.required' => 'Jenis kelamin harus dipilih.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
+            'alamat.string' => 'Alamat harus berupa teks.',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $user = Auth::user();
+            $pimpinan = Pimpinan::where('user_id', $user->id)->first();
+
+            if (!$pimpinan) {
+                $data['user_id'] = $user->id;
+                $pimpinan = Pimpinan::create($data);
+            }
+
+            DB::commit();
+
+            return redirect()->route('profile.index')->with('success', 'Data berhasil diperbarui');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 }

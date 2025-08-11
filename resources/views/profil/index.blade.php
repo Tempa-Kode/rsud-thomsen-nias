@@ -35,6 +35,9 @@
                         @case('pasien')
                             @include('komponen.profile.pasien')
                             @break
+                        @case('pimpinan')
+                            @include('komponen.profile.pimpinan')
+                            @break
                         @default
                             -
                     @endswitch
