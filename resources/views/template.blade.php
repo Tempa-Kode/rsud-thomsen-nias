@@ -67,6 +67,18 @@
                         @case('superadmin')
                             @include('komponen.menu.superadmin')
                             @break
+                        @case('pasien')
+                            @include('komponen.menu.pasien')
+                            @break
+                        @case('dokter')
+                            @include('komponen.menu.dokter')
+                            @break
+                        @case('kasir')
+                            @include('komponen.menu.kasir')
+                            @break
+                        @case('pimpinan')
+                            @include('komponen.menu.pimpinan')
+                            @break
                         @default
                             <li class="menu-header">Dashboard</li>
                             <li class="{{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
