@@ -38,6 +38,9 @@
                         @case('pimpinan')
                             @include('komponen.profile.pimpinan')
                             @break
+                        @case('kasir')
+                            @include('komponen.profile.kasir')
+                            @break
                         @default
                             -
                     @endswitch

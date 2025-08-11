@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kasir;
 use App\Models\Pasien;
 use App\Models\Pimpinan;
 use App\Models\User;
@@ -102,6 +103,44 @@ class ProfileController extends Controller
             return redirect()->back()
                 ->withInput()
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    public function updateDataKasir(Request $request)
+    {
+        $data = $request->validate([
+            'nama' => 'required|string|max:50',
+            'jenis_kelamin' => 'required|in:L,P',
+            'tempat_lahir' => 'required|string|max:50',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'nullable|string'
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'jenis_kelamin.required' => 'Jenis kelamin harus dipilih.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
+            'alamat.string' => 'Alamat harus berupa teks.',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $user = Auth::user();
+            $kasir = Kasir::where('user_id', $user->id)->first();
+
+            if (!$kasir) {
+                $data['user_id'] = $user->id;
+                Kasir::create($data);
+            } else {
+                $kasir->update($data);
+            }
+
+            DB::commit();
+
+            return redirect()->route('profile.index')->with('success', 'Data berhasil diperbarui');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 }
