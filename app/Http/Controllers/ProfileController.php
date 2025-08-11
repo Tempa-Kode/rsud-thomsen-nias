@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Kasir;
 use App\Models\Pasien;
 use App\Models\Pimpinan;
+use App\Models\Dokter;
+use App\Models\Poli;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +21,10 @@ class ProfileController extends Controller
         // Only load the specific relationship needed
         $data = User::where('id', $user->id)->with($role)->first();
         $relasiData = $data->$role;
-        return view('profil.index', compact('data', 'role', 'relasiData'));
+        if ($role == 'dokter') {
+            $poli = Poli::all();
+        }
+        return view('profil.index', compact('data', 'role', 'relasiData', 'poli'));
     }
 
     public function updateDataPasien(Request $request)
@@ -141,6 +146,42 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    public function updateDataDokter(Request $request)
+    {
+        $user = Auth::user();
+        $dokter = Dokter::where('user_id', $user->id)->first();
+
+        $data = $request->validate([
+            'nip' => 'required|string|max:30|unique:dokter,nip,' . ($dokter ? $dokter->id : ''),
+            'nama' => 'required|string|max:50|unique:dokter,nama,' . ($dokter ? $dokter->id : ''),
+            'poli_id' => 'required|exists:poli,id',
+            'jenis_kelamin' => 'required|in:L,P',
+            'tempat_lahir' => 'required|string|max:50',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'nullable|string'
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            if (!$dokter) {
+                $data['user_id'] = $user->id;
+                $dokter = Dokter::create($data);
+            } else {
+                $dokter->update($data);
+            }
+
+            DB::commit();
+
+            return redirect()->route('profile.index')->with('success', 'Data berhasil diperbarui');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 }

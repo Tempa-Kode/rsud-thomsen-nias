@@ -41,6 +41,9 @@
                         @case('kasir')
                             @include('komponen.profile.kasir')
                             @break
+                        @case('dokter')
+                            @include('komponen.profile.dokter')
+                            @break
                         @default
                             -
                     @endswitch

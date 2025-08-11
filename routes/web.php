@@ -23,4 +23,5 @@ Route::prefix('profile')->middleware(['auth'])->group(function () {
     Route::post('/update-data-pasien', [\App\Http\Controllers\ProfileController::class, 'updateDataPasien'])->name('profile.updateDataPasien');
     Route::post('/update-data-pimpinan', [\App\Http\Controllers\ProfileController::class, 'updateDataPimpinan'])->name('profile.updateDataPimpinan');
     Route::post('/update-data-kasir', [\App\Http\Controllers\ProfileController::class, 'updateDataKasir'])->name('profile.updateDataKasir');
+    Route::post('/update-data-dokter', [\App\Http\Controllers\ProfileController::class, 'updateDataDokter'])->name('profile.updateDataDokter');
 });
