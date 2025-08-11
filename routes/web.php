@@ -17,3 +17,8 @@ Route::prefix('/pengguna')->middleware(['auth'])->group(function () {
 });
 Route::resource('poli', \App\Http\Controllers\PoliController::class)->middleware(['auth'])->names('poli');
 Route::resource('obat', \App\Http\Controllers\ObatController::class)->middleware(['auth'])->names('obat');
+
+Route::prefix('profile')->middleware(['auth'])->group(function () {
+    Route::get('/', [\App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/update-data-pasien', [\App\Http\Controllers\ProfileController::class, 'updateDataPasien'])->name('profile.updateDataPasien');
+});

@@ -11,6 +11,7 @@ class Pasien extends Model
     protected $fillable = [
         'user_id',
         'no_bpjs',
+        'nik',
         'nama',
         'jenis_kelamin',
         'tempat_lahir',
@@ -22,6 +23,8 @@ class Pasien extends Model
         'agama',
         'pekerjaan'
     ];
+
+    public $timestamps = false;
 
     public function user()
     {
