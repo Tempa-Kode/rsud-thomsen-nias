@@ -123,6 +123,7 @@
 <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
 <!-- JS Libraies -->
+<script src="{{ asset('node_modules/prismjs/prism.js') }}"></script>
 
 <!-- Template JS File -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -134,5 +135,6 @@
 </script>
 
 <!-- Page Specific JS File -->
+<script src="{{ asset('assets/js/page/bootstrap-modal.js') }}"></script>
 </body>
 </html>
