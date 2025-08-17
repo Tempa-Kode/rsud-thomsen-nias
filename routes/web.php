@@ -26,6 +26,9 @@ Route::prefix('profile')->middleware(['auth'])->group(function () {
     Route::post('/update-data-dokter', [\App\Http\Controllers\ProfileController::class, 'updateDataDokter'])->name('profile.updateDataDokter');
 });
 
-Route::prefix('rawat-jalan')->middleware(['auth'])->group(function () {
+Route::prefix('rawat-jalan')->middleware(['auth', 'profilePasien'])->group(function () {
     Route::get('/', [\App\Http\Controllers\RawatJalanController::class, 'index'])->name('rawat-jalan.index');
+    Route::get('/pilih-pendaftaran', [\App\Http\Controllers\RawatJalanController::class, 'pilihPendaftaran'])->name('rawat-jalan.pilih-pendaftaran');
+    Route::get('/halaman-pendaftaran', [\App\Http\Controllers\RawatJalanController::class, 'halamanPendaftaran'])->name('rawat-jalan.halaman-pendaftaran');
+    Route::post('/daftar', [\App\Http\Controllers\RawatJalanController::class, 'daftar'])->name('rawat-jalan.daftar');
 });

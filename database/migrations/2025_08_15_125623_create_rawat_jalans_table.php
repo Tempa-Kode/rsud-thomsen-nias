@@ -18,6 +18,9 @@ return new class extends Migration
             $table->foreignId('dokter_id')->nullable()->constrained('dokter')->onDelete('restrict');
             $table->text('deskripsi_keluhan')->nullable();
             $table->boolean('bpjs')->default(false);
+            $table->date('tanggal_kunjungan');
+            $table->enum('status', ['menunggu', 'dalam_perawatan', 'selesai'])->default('menunggu');
+            $table->integer('nomor_antrian')->nullable();
         });
     }
 

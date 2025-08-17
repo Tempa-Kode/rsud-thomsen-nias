@@ -16,7 +16,7 @@
             <div class="card">
                 @can('create', App\Models\RawatJalan::class)
                 <div class="pt-3 pl-3">
-                    <button class="btn btn-primary" id="modal-2" data-toggle="modal" data-target="#registrasiModal">Daftar Rawat Jalan</button>
+                    <a href="{{ route('rawat-jalan.pilih-pendaftaran') }}" class="btn btn-primary">Daftar Rawat Jalan</a>
                 </div>
                 @endcan
                 <div class="card-body p-3">
@@ -25,16 +25,52 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nama Obat</th>
-                                    <th>Jenis Obat</th>
-                                    <th>Merk Obat</th>
-                                    <th>Stok Obat</th>
-                                    <th>Harga Obat</th>
-                                    <th>Aksi</th>
+                                    <th>NIK</th>
+                                    <th>No. Antrian</th>
+                                    <th>Nama Pasien</th>
+                                    <th>Tanggal Kunjungan</th>
+                                    <th>Umur</th>
+                                    <th>Poli Tujuan</th>
+                                    <th>Dokter</th>
+                                    <th>Status</th>
+                                    @if(!Auth::user()->role == 'pasien')
+                                        <th>Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
-
+                            @foreach($rawatJalan as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nomor_antrian }}</td>
+                                    <td>{{ $item->pasien->nik }}</td>
+                                    <td>{{ $item->pasien->nama }}</td>
+                                    <td>{{ $item->tanggal_kunjungan }}</td>
+                                    <td>
+                                        @php
+                                            echo \Carbon\Carbon::parse($item->pasien->tanggal_lahir)->age . ' tahun';
+                                        @endphp
+                                    </td>
+                                    <td>{{ $item->poli->nama_poli }}</td>
+                                    <td>{{ $item->dokter->nama ?? '-' }}</td>
+                                    <td>
+                                        @if($item->status === 'menunggu')
+                                            <span class="badge badge-warning">Menunggu</span>
+                                        @elseif($item->status === 'dalam_perawatan')
+                                            <span class="badge badge-info">Dalam Perawatan</span>
+                                        @elseif($item->status === 'selesai')
+                                            <span class="badge badge-success">Selesai</span>
+                                        @else
+                                            <span class="badge badge-secondary">{{ $item->status }}</span>
+                                        @endif
+                                    </td>
+                                    @if(!Auth::user()->role == 'pasien')
+                                    <td>
+                                        aksi
+                                    </td>
+                                    @endif
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -42,26 +78,4 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="registrasiModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Registrasi Pasien Rawat Jalan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Testing</p>
-                </div>
-                <div class="modal-footer bg-whitesmoke br">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 @endsection

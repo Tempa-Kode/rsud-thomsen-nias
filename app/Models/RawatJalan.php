@@ -14,6 +14,9 @@ class RawatJalan extends Model
         'dokter_id',
         'deskripsi_keluhan',
         'bpjs',
+        'tanggal_kunjungan',
+        'status',
+        'nomor_antrian'
     ];
 
     public $timestamps = false;
