@@ -33,7 +33,7 @@
         <div class="row">
             <div class="form-group col-md-7 col-12">
                 <label for="no_bpjs">No BPJS</label>
-                <input type="email" class="form-control @error('no_bpjs') is-invalid @enderror" name="no_bpjs" id="no_bpjs" value="{{ old('no_bpjs', $relasiData->no_bpjs ?? '') }}" placeholder="Belum diisi">
+                <input type="number" class="form-control @error('no_bpjs') is-invalid @enderror" name="no_bpjs" id="no_bpjs" value="{{ old('no_bpjs', $relasiData->no_bpjs ?? '') }}" placeholder="Belum diisi">
                 @error('no_bpjs')
                     <div class="invalid-feedback">
                         {{ $message }}
