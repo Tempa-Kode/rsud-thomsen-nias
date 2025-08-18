@@ -16,9 +16,9 @@ class LengkapiProfilePasien
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->pasien){
-            return $next($request);
+        if(Auth::user()->role === 'pasien' && !Auth::user()->pasien) {
+            return redirect()->route('profile.index')->with('error', 'Anda harus melengkapi profil pasien terlebih dahulu.');
         }
-        return redirect()->route('profile.index')->with('error', 'Anda harus melengkapi profil pasien terlebih dahulu.');
+        return $next($request);
     }
 }
