@@ -13,17 +13,26 @@ use function PHPUnit\Framework\isEmpty;
 
 class RawatJalanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         Gate::authorize('viewAny', RawatJalan::class);
-        if(Auth::user()->role === 'pasien'){
+        $isBpjs = $request->query('bpjs') ?? true;
+        if(Auth::user()->role == 'pasien'){
             $rawatJalan = RawatJalan::where('pasien_id', Auth::user()->pasien->id)
+                ->bpjs($isBpjs)
+                ->with('dokter', 'pasien', 'poli')
+                ->orderBy('id', 'desc')
+                ->get();
+            return view('rawat-jalan.index', compact('rawatJalan'));
+        } elseif (Auth::user()->role == 'dokter'){
+            $rawatJalan = RawatJalan::where('poli_id', Auth::user()->dokter->poli->id)
+                ->bpjs($isBpjs)
                 ->with('dokter', 'pasien', 'poli')
                 ->orderBy('id', 'desc')
                 ->get();
             return view('rawat-jalan.index', compact('rawatJalan'));
         }
-        $rawatJalan = RawatJalan::orderBy('id', 'desc')->get();
+        $rawatJalan = RawatJalan::bpjs($isBpjs)->orderBy('id', 'desc')->get();
         return view('rawat-jalan.index', compact('rawatJalan'));
     }
 

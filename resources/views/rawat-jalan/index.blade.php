@@ -14,11 +14,23 @@
                 </div>
             @endif
             <div class="card">
-                @can('create', App\Models\RawatJalan::class)
-                <div class="pt-3 pl-3">
-                    <a href="{{ route('rawat-jalan.pilih-pendaftaran') }}" class="btn btn-primary">Daftar Rawat Jalan</a>
+                <div class="d-flex justify-content-between align-items-center p-3">
+                    <div class="d-flex">
+                        <form action="" class="d-inline" method="get">
+                            <input type="text" hidden name="bpjs" value="1">
+                            <button type="submit" class="btn btn-sm btn-success">Pasien BPJS</button>
+                        </form>
+                        <form action="" method="get">
+                            <input type="text" hidden name="bpjs" value="0">
+                            <button type="submit" class="btn btn-sm btn-outline-success ml-2">Pasien Non BPJS</button>
+                        </form>
+                    </div>
+                    @can('create', App\Models\RawatJalan::class)
+                    <div class="pt-3 pl-3">
+                        <a href="{{ route('rawat-jalan.pilih-pendaftaran') }}" class="btn btn-primary">Daftar Rawat Jalan</a>
+                    </div>
+                    @endcan
                 </div>
-                @endcan
                 <div class="card-body p-3">
                     <div class="table-responsive">
                         <table id="datatable" class="table table-bordered table-md">
@@ -28,12 +40,13 @@
                                     <th>NIK</th>
                                     <th>No. Antrian</th>
                                     <th>Nama Pasien</th>
+                                    @if(request('bpjs') == '1') <th>No BPJS</th> @endif
                                     <th>Tanggal Kunjungan</th>
                                     <th>Umur</th>
                                     <th>Poli Tujuan</th>
                                     <th>Dokter</th>
                                     <th>Status</th>
-                                    @if(!Auth::user()->role == 'pasien')
+                                    @if(Auth::user()->role != 'pasien')
                                         <th>Aksi</th>
                                     @endif
                                 </tr>
@@ -42,9 +55,10 @@
                             @foreach($rawatJalan as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nomor_antrian }}</td>
                                     <td>{{ $item->pasien->nik }}</td>
+                                    <td>{{ $item->nomor_antrian }}</td>
                                     <td>{{ $item->pasien->nama }}</td>
+                                    @if(request('bpjs') == '1') <td>{{ $item->pasien->no_bpjs }}</td> @endif
                                     <td>{{ $item->tanggal_kunjungan }}</td>
                                     <td>
                                         @php
@@ -64,9 +78,9 @@
                                             <span class="badge badge-secondary">{{ $item->status }}</span>
                                         @endif
                                     </td>
-                                    @if(!Auth::user()->role == 'pasien')
+                                    @if(Auth::user()->role != 'pasien')
                                     <td>
-                                        aksi
+                                        <a href="" class="btn btn-success">Periksa</a>
                                     </td>
                                     @endif
                                 </tr>

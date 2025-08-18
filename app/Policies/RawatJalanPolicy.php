@@ -13,7 +13,7 @@ class RawatJalanPolicy
      */
     public function viewAny(User $user): Response
     {
-        return $user->role == 'pasien'
+        return $user->role == 'pasien' || $user->role == 'dokter'
             ? Response::allow()
             : Response::deny('anda tidak memiliki akses untuk melihat data rawat jalan.');
     }

@@ -35,4 +35,9 @@ class RawatJalan extends Model
     {
         return $this->belongsTo(Dokter::class);
     }
+
+    public function scopeBpjs($query, $bpjs)
+    {
+        return $query->where('bpjs', $bpjs);
+    }
 }
