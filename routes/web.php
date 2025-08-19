@@ -32,3 +32,9 @@ Route::prefix('rawat-jalan')->middleware(['auth', 'profilePasien'])->group(funct
     Route::get('/halaman-pendaftaran', [\App\Http\Controllers\RawatJalanController::class, 'halamanPendaftaran'])->name('rawat-jalan.halaman-pendaftaran');
     Route::post('/daftar', [\App\Http\Controllers\RawatJalanController::class, 'daftar'])->name('rawat-jalan.daftar');
 });
+
+Route::prefix('riwayat-pemeriksaan')->middleware(['auth'])->group(function () {
+    Route::get('/', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'index'])->name('riwayat-pemeriksaan.index');
+    Route::get('/periksa/{id}', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'periksa'])->name('riwayat-pemeriksaan.periksa');
+    Route::post('/periksa/{id}', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'simpanPemeriksaan'])->name('riwayat-pemeriksaan.simpanPeriksa');
+});

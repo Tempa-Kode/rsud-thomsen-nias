@@ -11,6 +11,7 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
+    <link rel="stylesheet" href="{{ asset('node_modules/select2/dist/css/select2.min.css') }}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -124,6 +125,7 @@
 
 <!-- JS Libraies -->
 <script src="{{ asset('node_modules/prismjs/prism.js') }}"></script>
+<script src="{{ asset('node_modules/select2/dist/js/select2.full.min.js') }}"></script>
 
 <!-- Template JS File -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -136,5 +138,6 @@
 
 <!-- Page Specific JS File -->
 <script src="{{ asset('assets/js/page/bootstrap-modal.js') }}"></script>
+@stack('script')
 </body>
 </html>

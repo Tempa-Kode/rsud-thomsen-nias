@@ -80,7 +80,7 @@
                                     </td>
                                     @if(Auth::user()->role != 'pasien')
                                     <td>
-                                        <a href="" class="btn btn-success">Periksa</a>
+                                        <a href="{{ route('riwayat-pemeriksaan.periksa', $item->id) }}" class="btn btn-success">Periksa</a>
                                     </td>
                                     @endif
                                 </tr>
