@@ -41,3 +41,8 @@ Route::prefix('riwayat-pemeriksaan')->middleware(['auth'])->group(function () {
     Route::put('/{id}', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'update'])->name('riwayat-pemeriksaan.update');
     Route::get('/{id}', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'show'])->name('riwayat-pemeriksaan.show');
 });
+
+Route::prefix('resep-obat')->middleware(['auth'])->group(function () {
+    Route::get('/', [\App\Http\Controllers\ResepObatController::class, 'index'])->name('resep-obat.index');
+    Route::get('/{id}', [\App\Http\Controllers\ResepObatController::class, 'show'])->name('resep-obat.show');
+});

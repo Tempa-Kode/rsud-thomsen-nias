@@ -36,6 +36,16 @@ class RawatJalan extends Model
         return $this->belongsTo(Dokter::class);
     }
 
+    public function riwayatPemeriksaan()
+    {
+        return $this->hasOne(RiwayatPemeriksaan::class);
+    }
+
+    public function resepObat()
+    {
+        return $this->hasMany(ResepObat::class);
+    }
+
     public function scopeBpjs($query, $bpjs)
     {
         return $query->where('bpjs', $bpjs);
