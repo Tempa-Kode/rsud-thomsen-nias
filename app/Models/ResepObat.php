@@ -20,4 +20,9 @@ class ResepObat extends Model
     {
         return $this->belongsTo(RawatJalan::class, 'rawat_jalan_id');
     }
+
+    public function obat()
+    {
+        return $this->belongsTo(Obat::class, 'obat_id');
+    }
 }

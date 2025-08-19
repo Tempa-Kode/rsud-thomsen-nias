@@ -17,12 +17,21 @@ class RiwayatPemeriksaanController extends Controller
         $bpjs = $request->has('bpjs')
             ? filter_var($request->query('bpjs'), FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)
             : null;
-        $data = RiwayatPemeriksaan::with('rawatJalan.pasien', 'rawatJalan.dokter', 'rawatJalan.poli')
+
+        $query = RiwayatPemeriksaan::with('rawatJalan.pasien', 'rawatJalan.dokter', 'rawatJalan.poli')
             ->join('rawat_jalan', 'riwayat_pemeriksaan.rawat_jalan_id', '=', 'rawat_jalan.id')
             ->select('riwayat_pemeriksaan.*')
             ->orderBy('rawat_jalan.tanggal_kunjungan', 'desc')
-            ->bpjs($bpjs)
-            ->get();
+            ->bpjs($bpjs);
+
+        if (Auth::user()->role == 'pasien') {
+            $query->whereHas('rawatJalan', function ($q) {
+                $q->where('pasien_id', Auth::user()->pasien->id);
+            });
+        }
+
+        $data = $query->get();
+
         return view('riwayat-pemeriksaan.index', compact('data'));
     }
 
@@ -90,5 +99,68 @@ class RiwayatPemeriksaanController extends Controller
             DB::rollBack();
             return redirect()->back()->withErrors(['error' => "Terjadi kesalahan saat menyimpan data. {$e->getMessage()}"]);
         }
+    }
+
+    public function edit($id)
+    {
+        $pemeriksaan = RiwayatPemeriksaan::with(['rawatJalan.pasien', 'rawatJalan.dokter', 'rawatJalan.poli'])
+            ->findOrFail($id);
+        $obat = Obat::all();
+
+        // Ambil resep-obat lama berdasarkan rawat_jalan_id untuk ditampilkan
+        $resep = \App\Models\ResepObat::where('rawat_jalan_id', $pemeriksaan->rawat_jalan_id)->get();
+
+        return view('riwayat-pemeriksaan.edit', compact('pemeriksaan', 'obat', 'resep'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $pemeriksaan = RiwayatPemeriksaan::findOrFail($id);
+
+        $validasi = $request->validate([
+            'penyakit' => 'required|string|max:255',
+            'diagnosa' => 'required|string|max:255',
+            'biaya_pemeriksaan' => 'required|numeric|min:0',
+            'obat.*' => 'required|exists:obat,id',
+            'jumlah.*' => 'required|numeric|min:1',
+            'keterangan.*' => 'nullable|string|max:255',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $pemeriksaan->update([
+                'penyakit' => $validasi['penyakit'],
+                'diagnosa' => $validasi['diagnosa'],
+                'biaya_pemeriksaan' => $validasi['biaya_pemeriksaan'],
+            ]);
+
+            // Reset resep obat lama dan simpan ulang sederhana
+            ResepObat::where('rawat_jalan_id', $pemeriksaan->rawat_jalan_id)->delete();
+            foreach ($request->input('obat', []) as $idx => $obatId) {
+                ResepObat::create([
+                    'rawat_jalan_id' => $pemeriksaan->rawat_jalan_id,
+                    'obat_id' => $obatId,
+                    'jumlah' => $request->input("jumlah.$idx"),
+                    'keterangan' => $request->input("keterangan.$idx"),
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('riwayat-pemeriksaan.index')->with('success', 'Data pemeriksaan berhasil diperbarui.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => "Gagal memperbarui data. {$e->getMessage()}"])->withInput();
+        }
+    }
+
+    public function show($id)
+    {
+        $pemeriksaan = RiwayatPemeriksaan::with(['rawatJalan.pasien', 'rawatJalan.dokter', 'rawatJalan.poli'])
+            ->findOrFail($id);
+        $resep = ResepObat::where('rawat_jalan_id', $pemeriksaan->rawat_jalan_id)
+            ->with('obat')
+            ->get();
+
+        return view('riwayat-pemeriksaan.show', compact('pemeriksaan', 'resep'));
     }
 }

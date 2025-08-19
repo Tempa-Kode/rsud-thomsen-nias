@@ -1,13 +1,13 @@
-@extends('template')
-@section('title', 'Riwayat Pemeriksaan')
-@section('header', 'Riwayat Pemeriksaan')
+@extends("template")
+@section("title", "Riwayat Pemeriksaan")
+@section("header", "Riwayat Pemeriksaan")
 
-@section('body')
+@section("body")
     <div class="row">
         <div class="col-12">
-            @if(session('success'))
+            @if (session("success"))
                 <div class="alert alert-success alert-dismissible fade show mb-2" role="alert">
-                    <strong>Berhasil!</strong> {{ session('success') }}
+                    <strong>Berhasil!</strong> {{ session("success") }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -34,7 +34,9 @@
                                     <th>#</th>
                                     <th>NIK</th>
                                     <th>Nama Pasien</th>
-                                    @if(request('bpjs') == '1') <th>No BPJS</th> @endif
+                                    @if (request("bpjs") == "1")
+                                        <th>No BPJS</th>
+                                    @endif
                                     <th>Poli Tujuan</th>
                                     <th>Dokter</th>
                                     <th>Penyakit</th>
@@ -42,20 +44,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($data as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->rawatJalan->pasien->nik }}</td>
-                                    <td>{{ $item->rawatJalan->pasien->nama }}</td>
-                                    @if(request('bpjs') == '1') <td>{{ $item->rawatJalan->pasien->no_bpjs }}</td> @endif
-                                    <td>{{ $item->rawatJalan->poli->nama_poli }}</td>
-                                    <td>{{ $item->rawatJalan->dokter->nama ?? '-' }}</td>
-                                    <td>{{ $item->penyakit ?? '-' }}</td>
-                                    <td>
-                                        -
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach ($data as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->rawatJalan->pasien->nik }}</td>
+                                        <td>{{ $item->rawatJalan->pasien->nama }}</td>
+                                        @if (request("bpjs") == "1")
+                                            <td>{{ $item->rawatJalan->pasien->no_bpjs }}</td>
+                                        @endif
+                                        <td>{{ $item->rawatJalan->poli->nama_poli }}</td>
+                                        <td>{{ $item->rawatJalan->dokter->nama ?? "-" }}</td>
+                                        <td>{{ $item->penyakit ?? "-" }}</td>
+                                        <td>
+                                            <a href="{{ route("riwayat-pemeriksaan.show", $item->id) }}"
+                                                class="btn btn-secondary mr-1">Detail</a>
+                                            @if (Auth::user()->can('aksi', $item))
+                                                <a href="{{ route("riwayat-pemeriksaan.edit", $item->id) }}"
+                                                    class="btn btn-primary">Edit</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

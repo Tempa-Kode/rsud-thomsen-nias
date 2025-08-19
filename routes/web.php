@@ -37,4 +37,7 @@ Route::prefix('riwayat-pemeriksaan')->middleware(['auth'])->group(function () {
     Route::get('/', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'index'])->name('riwayat-pemeriksaan.index');
     Route::get('/periksa/{id}', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'periksa'])->name('riwayat-pemeriksaan.periksa');
     Route::post('/periksa/{id}', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'simpanPemeriksaan'])->name('riwayat-pemeriksaan.simpanPeriksa');
+    Route::get('/{id}/edit', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'edit'])->name('riwayat-pemeriksaan.edit');
+    Route::put('/{id}', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'update'])->name('riwayat-pemeriksaan.update');
+    Route::get('/{id}', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'show'])->name('riwayat-pemeriksaan.show');
 });
