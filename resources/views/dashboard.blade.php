@@ -5,7 +5,7 @@
 @section('header', 'Dashboard')
 
 @section('body')
-    @if(!$lengkapiDataAkun)
+    @if(!$lengkapiDataAkun && Auth::user()->role != 'superadmin')
         <div class="col-12 mb-4">
             <div class="hero bg-primary text-white">
                 <div class="hero-inner">
