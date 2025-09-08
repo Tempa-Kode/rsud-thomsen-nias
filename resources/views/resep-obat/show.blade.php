@@ -1,7 +1,6 @@
 @extends("template")
 @section("title", "Detail Resep Obat")
 @section("header", "Detail Resep Obat")
-
 @section("body")
     <div class="row">
         <div class="col-12">
@@ -37,9 +36,16 @@
                                 <p>{{ $rawatJalan->poli->nama_poli }}</p>
                             </div>
 
+                            @if ($rawatJalan->bpjs == 1)
+                                <div class="form-group">
+                                    <label><strong>No BPJS:</strong></label>
+                                    <p>{{ $rawatJalan->pasien->no_bpjs ?? '-' }}</p>
+                                </div>
+                            @endif
+
                             <div class="form-group">
                                 <label><strong>Dokter:</strong></label>
-                                <p>{{ $rawatJalan->dokter->nama }}</p>
+                                <p>{{ $rawatJalan->dokter->nama ?? '-' }}</p>
                             </div>
                         </div>
 
@@ -92,8 +98,8 @@
                                     @php $totalKeseluruhan += $subtotal; @endphp
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $resep->obat->nama }}</td>
-                                        <td>{{ $resep->obat->jenis }}</td>
+                                        <td>{{ $resep->obat->nama_obat }}</td>
+                                        <td>{{ $resep->obat->jenis_obat }}</td>
                                         <td>Rp {{ number_format($resep->obat->harga, 0, ',', '.') }}</td>
                                         <td>{{ $resep->jumlah }}</td>
                                         <td>Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
