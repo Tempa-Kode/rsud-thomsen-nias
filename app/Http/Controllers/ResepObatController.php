@@ -18,6 +18,9 @@ class ResepObatController extends Controller
         // Filter berdasarkan role pengguna
         if (Auth::user()->role == 'pasien') {
             $query->where('pasien_id', Auth::user()->pasien->id);
+            $query->whereHas('pembayaran', function ($q) {
+                $q->where('satatus', 'Lunas');
+            });
         }
 
         $data = $query->get();
