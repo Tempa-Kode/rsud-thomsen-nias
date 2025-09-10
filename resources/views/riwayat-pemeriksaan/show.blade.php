@@ -52,8 +52,7 @@
                         <input class="form-control" value="{{ number_format($pemeriksaan->biaya_pemeriksaan, 0, ",", ".") }}"
                             readonly>
                     </div>
-
-                    @if (Auth::user()->role == 'pasien' && isset($pemeriksaan->rawatJalan->pembayaran) == null)
+                    @if (Auth::user()->role == 'pasien' && $pemeriksaan->rawatJalan->pembayaran->status == 'belum_lunas')
                         <div class="alert alert-warning">
                             Hasil pemeriksaan dan resep obat akan ditampilkan setelah melakukan pembayaran di bagian kasir.
                         </div>
