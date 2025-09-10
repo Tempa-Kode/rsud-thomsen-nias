@@ -10,7 +10,7 @@ class RiwayatPemeriksaanPolicy
 {
     public function aksi(User $user, RiwayatPemeriksaan $riwayatPemeriksaan): bool
     {
-        return $user->role !== 'pasien';
+        return $user->role === 'dokter';
     }
 
     /**

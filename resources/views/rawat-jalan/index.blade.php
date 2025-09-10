@@ -46,7 +46,7 @@
                                     <th>Poli Tujuan</th>
                                     <th>Dokter</th>
                                     <th>Status</th>
-                                    @if(Auth::user()->role != 'pasien')
+                                    @if(Auth::user()->role != 'pasien' && Auth::user()->role != 'kasir' && Auth::user()->role != 'pimpinan')
                                         <th>Aksi</th>
                                     @endif
                                 </tr>
@@ -78,7 +78,7 @@
                                             <span class="badge badge-secondary">{{ $item->status }}</span>
                                         @endif
                                     </td>
-                                    @if(Auth::user()->role != 'pasien')
+                                    @if(Auth::user()->role != 'pasien' && Auth::user()->role != 'kasir' && Auth::user()->role != 'pimpinan')
                                     <td>
                                         <a href="{{ route('riwayat-pemeriksaan.periksa', $item->id) }}" class="btn btn-success">Periksa</a>
                                     </td>
