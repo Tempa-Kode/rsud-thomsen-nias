@@ -46,6 +46,11 @@ class RawatJalan extends Model
         return $this->hasMany(ResepObat::class);
     }
 
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class);
+    }
+
     public function scopeBpjs($query, $bpjs)
     {
         return $query->where('bpjs', $bpjs);

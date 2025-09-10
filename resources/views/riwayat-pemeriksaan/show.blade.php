@@ -48,47 +48,54 @@
 
                     <hr>
                     <div class="form-group">
-                        <label>Penyakit</label>
-                        <input class="form-control" value="{{ $pemeriksaan->penyakit }}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label>Diagnosa</label>
-                        <textarea class="form-control" rows="4" readonly>{{ $pemeriksaan->diagnosa }}</textarea>
-                    </div>
-                    <div class="form-group">
                         <label>Biaya Pemeriksaan</label>
                         <input class="form-control" value="{{ number_format($pemeriksaan->biaya_pemeriksaan, 0, ",", ".") }}"
                             readonly>
                     </div>
 
-                    <hr>
-                    <h5>Resep Obat</h5>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nama Obat</th>
-                                    <th>Jumlah</th>
-                                    <th>Keterangan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($resep as $r)
+                    @if (Auth::user()->role == 'pasien' && isset($pemeriksaan->rawatJalan->pembayaran) == null)
+                        <div class="alert alert-warning">
+                            Hasil pemeriksaan dan resep obat akan ditampilkan setelah melakukan pembayaran di bagian kasir.
+                        </div>
+                    @else
+                        <div class="form-group">
+                            <label>Penyakit</label>
+                            <input class="form-control" value="{{ $pemeriksaan->penyakit }}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Diagnosa</label>
+                            <textarea class="form-control" rows="4" readonly>{{ $pemeriksaan->diagnosa }}</textarea>
+                        </div>
+                        <hr>
+                        <h5>Resep Obat</h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $r->obat->nama_obat ?? "-" }}</td>
-                                        <td>{{ $r->jumlah }}</td>
-                                        <td>{{ $r->keterangan ?? "-" }}</td>
+                                        <th>#</th>
+                                        <th>Nama Obat</th>
+                                        <th>Jumlah</th>
+                                        <th>Keterangan</th>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="4" class="text-center">Tidak ada resep</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    @forelse($resep as $r)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $r->obat->nama_obat ?? "-" }}</td>
+                                            <td>{{ $r->jumlah }}</td>
+                                            <td>{{ $r->keterangan ?? "-" }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="4" class="text-center">Tidak ada resep</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
+
 
                     <a href="{{ route("riwayat-pemeriksaan.index") }}" class="btn btn-secondary">Kembali</a>
                 </div>
