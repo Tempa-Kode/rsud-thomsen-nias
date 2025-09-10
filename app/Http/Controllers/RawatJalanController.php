@@ -43,7 +43,7 @@ class RawatJalanController extends Controller
 
     public function halamanPendaftaran(Request $request)
     {
-        if (isEmpty(Auth::user()->pasien->bpjs) && $request->query('bpjs') == 1) {
+        if (!Auth::user()->pasien->no_bpjs && $request->query('bpjs') == 1) {
             return redirect()->back()->withErrors(['error' => 'Anda harus melengkapi data BPJS terlebih dahulu.']);
         }
         $poli = Poli::all();
