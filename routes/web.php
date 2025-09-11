@@ -46,3 +46,8 @@ Route::prefix('resep-obat')->middleware(['auth'])->group(function () {
     Route::get('/', [\App\Http\Controllers\ResepObatController::class, 'index'])->name('resep-obat.index');
     Route::get('/{id}', [\App\Http\Controllers\ResepObatController::class, 'show'])->name('resep-obat.show');
 });
+
+Route::prefix('pembayaran')->middleware(['auth'])->group(function () {
+    Route::get('/', [\App\Http\Controllers\PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::put('/bayar/{id}', [\App\Http\Controllers\PembayaranController::class, 'bayar'])->name('pembayaran.bayar');
+});

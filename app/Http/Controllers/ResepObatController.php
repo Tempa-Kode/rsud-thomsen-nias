@@ -19,7 +19,7 @@ class ResepObatController extends Controller
         if (Auth::user()->role == 'pasien') {
             $query->where('pasien_id', Auth::user()->pasien->id);
             $query->whereHas('pembayaran', function ($q) {
-                $q->where('satatus', 'Lunas');
+                $q->where('status', 'lunas');
             });
         }
 

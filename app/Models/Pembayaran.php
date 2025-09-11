@@ -12,7 +12,7 @@ class Pembayaran extends Model
     protected $fillable = [
         'rawat_jalan_id',
         'grand_total',
-        'satatus',
+        'status',
         'kasir_id',
     ];
 

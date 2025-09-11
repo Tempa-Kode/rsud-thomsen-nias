@@ -75,6 +75,8 @@ class RiwayatPemeriksaanController extends Controller
             'keterangan.*.max' => 'Keterangan maksimal 255 karakter.',
         ]);
 
+        $totalHargaObat = 0;
+
         DB::beginTransaction();
         try{
             $riwayatPemeriksaan = RiwayatPemeriksaan::create([
@@ -90,9 +92,19 @@ class RiwayatPemeriksaanController extends Controller
                     'jumlah' => $validasi['jumlah'][$index],
                     'keterangan' => $validasi['keterangan'][$index] ?? null,
                 ]);
+                $obat = Obat::find($obatId);
+                if ($obat) {
+                    $totalHargaObat += $obat->harga * $validasi['jumlah'][$index];
+                }
             }
             RawatJalan::where('id', $validasi['rawat_jalan_id'])
                 ->update(['dokter_id' => Auth::user()->dokter->id, 'status' => 'selesai']);
+
+            $grandTotal = $validasi['biaya_pemeriksaan'] + $totalHargaObat;
+            PembayaranController::tambah([
+                'rawat_jalan_id' => $validasi['rawat_jalan_id'],
+                'grand_total' => $grandTotal,
+            ]);
             DB::commit();
             return redirect()->route('riwayat-pemeriksaan.index')->with('success', 'Data pemeriksaan berhasil disimpan.');
         } catch (\Exception $e) {
@@ -144,6 +156,12 @@ class RiwayatPemeriksaanController extends Controller
                     'keterangan' => $request->input("keterangan.$idx"),
                 ]);
             }
+
+            $pemeriksaan->rawatJalan->pembayaran->update([
+                'grand_total' => $validasi['biaya_pemeriksaan'] + ResepObat::where('rawat_jalan_id', $pemeriksaan->rawat_jalan_id)
+                    ->join('obat', 'resep_obat.obat_id', '=', 'obat.id')
+                    ->sum(DB::raw('obat.harga * resep_obat.jumlah')),
+            ]);
 
             DB::commit();
             return redirect()->route('riwayat-pemeriksaan.index')->with('success', 'Data pemeriksaan berhasil diperbarui.');
