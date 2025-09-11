@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class PembayaranController extends Controller
 {
@@ -60,5 +61,28 @@ class PembayaranController extends Controller
             'status' => 'success',
             'message' => 'Pembayaran berhasil dilakukan'
         ], 200);
+    }
+
+    public function strukPembayaran($id)
+    {
+        $pembayaran = Pembayaran::with([
+            'rawatJalan',
+            'rawatJalan.pasien',
+            'rawatJalan.dokter',
+            'rawatJalan.poli',
+            'rawatJalan.riwayatPemeriksaan',
+            'rawatJalan.resepObat',
+            'rawatJalan.resepObat.obat',
+            'kasir'
+        ])->find($id);
+
+        if(!$pembayaran){
+            return redirect()->back()->with('error', 'Data pembayaran tidak ditemukan');
+        } else if ($pembayaran->status === 'belum_lunas'){
+            return redirect()->back()->with('error', 'Pembayaran belum lunas');
+        }
+
+        return PDF::loadView('pembayaran.struk', compact('pembayaran'))
+            ->stream('struk-pembayaran-'.$pembayaran->id.'.pdf');
     }
 }

@@ -31,9 +31,7 @@
                                     <th>Nama Pasien</th>
                                     <th>Total Harga</th>
                                     <th>Status</th>
-                                    @if (Auth::user()->role == 'kasir')
-                                        <th>Aksi</th>
-                                    @endif
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,19 +40,23 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->rawatJalan->tanggal_kunjungan }}</td>
                                         <td>{{ $item->rawatJalan->poli->nama_poli }}</td>
-                                        <td>{{ $item->rawatJalan->pasien->no_bpjs ?? 'Non BPJS' }}</td>
+                                        <td>{{ $item->rawatJalan->pasien->no_bpjs ?? "Non BPJS" }}</td>
                                         <td>{{ $item->rawatJalan->pasien->nama }}</td>
                                         <td>Rp. {{ number_format($item->grand_total, 0, ",", ".") }}</td>
-                                        <td><span class="badge badge-{{ $item->status == 'Lunas' ? 'success' : 'warning' }}">{{ $item->status == 'lunas' ? 'Lunas' : 'Belum Lunas' }}</span></td>
-                                        @if (Auth::user()->role == 'kasir')
-                                            <td>
-                                                @if ($item->status == 'belum_lunas')
-                                                    <button type="button" class="btn btn-sm btn-success pembayaran" data-id="{{ $item->id }}">Pembayaran</button>
-                                                @else
-                                                    <span class="text-success">-</span>
-                                                @endif
-                                            </td>
-                                        @endif
+                                        <td><span
+                                                class="badge badge-{{ $item->status == "Lunas" ? "success" : "warning" }}">{{ $item->status == "lunas" ? "Lunas" : "Belum Lunas" }}</span>
+                                        </td>
+                                        <td>
+                                            @if (Auth::user()->role == "kasir" && $item->status == "belum_lunas")
+                                                <button type="button" class="btn btn-sm btn-success pembayaran"
+                                                    data-id="{{ $item->id }}">Pembayaran</button>
+                                            @elseif ($item->status == "lunas")
+                                                <a href="{{ route("pembayaran.struk", $item->id) }}"
+                                                    class="btn btn-sm btn-primary" target="_blank">Struk Pembayaran</a>
+                                            @else
+                                                <span class="text-muted">Tidak ada aksi</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -67,10 +69,10 @@
 @endsection
 
 @push("script")
-    <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
+    <script src="{{ asset("assets/js/page/modules-datatables.js") }}"></script>
     <script type="text/javascript">
-        $(document).ready( function () {
-            $(".pembayaran").click(function(){
+        $(document).ready(function() {
+            $(".pembayaran").click(function() {
                 let id = $(this).data("id");
                 Swal.fire({
                     title: 'Konfirmasi Pembayaran',
@@ -119,6 +121,5 @@
                 })
             });
         });
-
     </script>
 @endpush
