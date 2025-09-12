@@ -14,9 +14,12 @@
                 </div>
             @endif
             <div class="card">
-                <div class="pt-3 pl-3">
-                    <a href="{{ route('dokter.create') }}" class="btn btn-primary">Tambah Data</a>
-                </div>
+                {{-- @dd(Auth::user()->role) --}}
+                @can('create', App\Models\Dokter::class)
+                    <div class="pt-3 pl-3">
+                        <a href="{{ route('dokter.create') }}" class="btn btn-primary">Tambah Data</a>
+                    </div>
+                @endcan
                 <div class="card-body p-3">
                     <div class="table-responsive">
                         <table id="datatable" class="table table-bordered table-md">
@@ -39,13 +42,17 @@
                                     <td>{{ $item->email }}</td>
                                     <td><div class="badge badge-success text-capitalize">{{ $item->role }}</div></td>
                                     <td>
-                                        <a href="{{ route('dokter.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                                        @can('update', $item->dokter)
+                                            <a href="{{ route('dokter.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                                        @endcan
                                         <a href="{{ route('dokter.show', $item->id) }}" class="btn btn-secondary">Detail</a>
+                                        @can('delete', $item->dokter)
                                         <form action="{{ route('dokter.destroy', $item->id) }}" class="d-inline" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda ingin menghapus data ini?')">Hapus</button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
