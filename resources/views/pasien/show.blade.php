@@ -31,6 +31,10 @@
                             <div class="col-sm-8">{{ $pasien->pasien->nama ?? "Data belum di isi" }}</div>
                         </div>
                         <div class="row mb-3">
+                            <div class="col-sm-4 font-weight-bold">No Bpjs</div>
+                            <div class="col-sm-8">{{ $pasien->pasien->no_bpjs ?? "Bukan Peserta BPJS" }}</div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-sm-4 font-weight-bold">Nama Jenis Kelamin</div>
                             <div class="col-sm-8">
                                 {{ $pasien->pasien && $pasien->pasien->jenis_kelamin == 'L' ? 'Laki-Laki' : ($pasien->pasien && $pasien->pasien->jenis_kelamin == 'P' ? 'Perempuan' : "Data belum di isi") }}
