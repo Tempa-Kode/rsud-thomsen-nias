@@ -80,7 +80,11 @@
                                     </td>
                                     @if(Auth::user()->role != 'pasien' && Auth::user()->role != 'kasir' && Auth::user()->role != 'pimpinan')
                                     <td>
-                                        <a href="{{ route('riwayat-pemeriksaan.periksa', $item->id) }}" class="btn btn-success">Periksa</a>
+                                        @if ($item->status === 'menunggu')
+                                            <a href="{{ route('riwayat-pemeriksaan.periksa', $item->id) }}" class="btn btn-success">Periksa</a>
+                                        @else
+                                            <span class="text-muted">Tidak ada aksi</span>
+                                        @endif
                                     </td>
                                     @endif
                                 </tr>

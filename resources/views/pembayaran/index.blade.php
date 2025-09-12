@@ -25,6 +25,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>No Rekam Medik</th>
                                     <th>Tanggal Kunjungan</th>
                                     <th>Poli</th>
                                     <th>No BPJS</th>
@@ -38,13 +39,14 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->rawatJalan->nomor_rekam_medik ?? '-' }}</td>
                                         <td>{{ $item->rawatJalan->tanggal_kunjungan }}</td>
                                         <td>{{ $item->rawatJalan->poli->nama_poli }}</td>
                                         <td>{{ $item->rawatJalan->pasien->no_bpjs ?? "Non BPJS" }}</td>
                                         <td>{{ $item->rawatJalan->pasien->nama }}</td>
                                         <td>Rp. {{ number_format($item->grand_total, 0, ",", ".") }}</td>
                                         <td><span
-                                                class="badge badge-{{ $item->status == "Lunas" ? "success" : "warning" }}">{{ $item->status == "lunas" ? "Lunas" : "Belum Lunas" }}</span>
+                                                class="badge badge-{{ $item->status == "lunas" ? "success" : "warning" }}">{{ $item->status == "lunas" ? "Lunas" : "Belum Lunas" }}</span>
                                         </td>
                                         <td>
                                             @if (Auth::user()->role == "kasir" && $item->status == "belum_lunas")

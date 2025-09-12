@@ -38,7 +38,11 @@ class RiwayatPemeriksaanController extends Controller
     public function periksa($id)
     {
         $data = RawatJalan::where('id', $id)->with('poli', 'pasien', 'dokter')->first();
-        $data->update(['status' => 'dalam_perawatan']);
+        $data->update([
+            'dokter_id' => Auth::user()->dokter->id,
+            'nomor_rekam_medik' => "RSUD-" . $data->pasien->id . '-' . now()->format('YmdHis'),
+            'status' => 'dalam_perawatan'
+        ]);
         $obat = Obat::all();
         return view('riwayat-pemeriksaan.periksa', compact('data', 'obat'));
     }

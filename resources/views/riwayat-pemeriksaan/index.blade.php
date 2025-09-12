@@ -32,6 +32,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>No Rekam Medik</th>
                                     <th>NIK</th>
                                     <th>Nama Pasien</th>
                                     @if (request("bpjs") == "1")
@@ -47,6 +48,7 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->rawatJalan->nomor_rekam_medik ?? "-" }}</td>
                                         <td>{{ $item->rawatJalan->pasien->nik }}</td>
                                         <td>{{ $item->rawatJalan->pasien->nama }}</td>
                                         @if (request("bpjs") == "1")

@@ -9,6 +9,7 @@ class RawatJalan extends Model
     protected $table = 'rawat_jalan';
 
     protected $fillable = [
+        'nomor_rekam_medik',
         'pasien_id',
         'poli_id',
         'dokter_id',
