@@ -3,7 +3,7 @@
 <li class="menu-header">Menu</li>
 <li class="{{ Route::currentRouteName() == 'dokter.index' ? 'active' : '' }}"><a class="nav-link" href="{{ route('dokter.index') }}"><i class="fas fa-stethoscope"></i> <span>Dokter</span></a></li>
 <li class="{{ Route::currentRouteName() == 'pasien.index' ? 'active' : '' }}"><a class="nav-link" href="{{ route('pasien.index') }}"><i class="fas fa-bed"></i> <span>Pasien</span></a></li>
-<li class=""><a class="nav-link" href="#"><i class="fas fa-pills"></i> <span>Obat</span></a></li>
+<li class="{{ Route::currentRouteName() == 'obat.index' ? 'active' : '' }}"><a class="nav-link" href="{{ route('obat.index') }}"><i class="fas fa-pills"></i> <span>Obat</span></a></li>
 <li class=""><a class="nav-link" href="{{ route('rawat-jalan.index') }}"><i class="fas fa-file-medical"></i> <span>Rawat Jalan</span></a></li>
 <li class=""><a class="nav-link" href="{{ route('riwayat-pemeriksaan.index') }}"><i class="fas fa-notes-medical"></i> <span>Pemeriksaan</span></a></li>
 <li class=""><a class="nav-link" href="#"><i class="fas fa-pills"></i> <span>Resep Obat</span></a></li>

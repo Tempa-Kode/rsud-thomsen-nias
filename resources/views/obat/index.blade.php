@@ -14,9 +14,11 @@
                 </div>
             @endif
             <div class="card">
-                <div class="pt-3 pl-3">
-                    <a href="{{ route('obat.create') }}" class="btn btn-primary">Tambah Data</a>
-                </div>
+                @can('create', App\Models\Obat::class)
+                    <div class="pt-3 pl-3">
+                        <a href="{{ route('obat.create') }}" class="btn btn-primary">Tambah Data</a>
+                    </div>
+                @endcan
                 <div class="card-body p-3">
                     <div class="table-responsive">
                         <table id="datatable" class="table table-bordered table-md">
@@ -28,7 +30,9 @@
                                     <th>Merk Obat</th>
                                     <th>Stok Obat</th>
                                     <th>Harga Obat</th>
-                                    <th>Aksi</th>
+                                    @can('aksi', App\Models\Obat::class)
+                                        <th>Aksi</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,14 +44,16 @@
                                     <td>{{ $item->merk_obat }}</td>
                                     <td>{{ $item->stok }}</td>
                                     <td>Rp. {{ $item->getHargaFormattedAttribute() }}</td>
-                                    <td>
-                                        <a href="{{ route('obat.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('obat.destroy', $item->id) }}" class="d-inline" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda ingin menghapus data ini?')">Hapus</button>
-                                        </form>
-                                    </td>
+                                    @can('aksi', App\Models\Obat::class)
+                                        <td>
+                                            <a href="{{ route('obat.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                                            <form action="{{ route('obat.destroy', $item->id) }}" class="d-inline" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda ingin menghapus data ini?')">Hapus</button>
+                                            </form>
+                                        </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                             </tbody>
