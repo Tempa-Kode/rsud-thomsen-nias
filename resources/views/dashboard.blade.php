@@ -18,4 +18,24 @@
             </div>
         </div>
     @endif
+    
+    @switch(Auth::user()->role)
+        @case('superadmin')
+            @include('dashboard.superadmin')
+            @break
+        @case('pasien')
+            @include('dashboard.pasien')
+            @break
+        @case('dokter')
+            @include('dashboard.dokter')
+            @break
+        @case('kasir')
+            @include('dashboard.kasir')
+            @break
+        @case('pimpinan')
+            @include('dashboard.pimpinan')
+            @break
+        @default
+            please contact admin
+    @endswitch
 @endsection

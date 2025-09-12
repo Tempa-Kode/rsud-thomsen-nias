@@ -47,8 +47,39 @@ class AuthController extends Controller
             ->first();
 
         $lengkapiDataAkun = isset($data->pasien) || isset($data->dokter) || isset($data->kasir) || isset($data->pimpinan);
-//        dd($lengkapiDataAkun);
-        return view('dashboard', compact('lengkapiDataAkun'));
+
+        // Data statistik untuk dashboard
+        $statistik = [
+            'total_pengguna' => User::count(),
+            'total_dokter' => \App\Models\Dokter::count(),
+            'total_kasir' => \App\Models\Kasir::count(),
+            'total_obat' => \App\Models\Obat::count(),
+            'total_pasien' => \App\Models\Pasien::count(),
+            'total_rawat_jalan' => \App\Models\RawatJalan::count(),
+            'total_pemeriksaan' => \App\Models\RiwayatPemeriksaan::count(),
+            'total_resep_obat' => \App\Models\ResepObat::count(),
+            'total_pembayaran' => \App\Models\Pembayaran::count(),
+            'total_poli' => \App\Models\Poli::count(),
+
+            // Statistik spesifik berdasarkan status
+            'rawat_jalan_hari_ini' => \App\Models\RawatJalan::whereDate('tanggal_kunjungan', today())->count(),
+            'pemeriksaan_hari_ini' => \App\Models\RiwayatPemeriksaan::whereHas('rawatJalan', function($q) {
+                $q->whereDate('tanggal_kunjungan', today());
+            })->count(),
+            'pasien_menunggu' => \App\Models\RawatJalan::where('status', 'menunggu')->count(),
+            'pasien_dalam_perawatan' => \App\Models\RawatJalan::where('status', 'dalam_perawatan')->count(),
+
+            // Obat dengan stok rendah
+            'obat_stok_rendah' => \App\Models\Obat::where('stok', '<', 10)->count(),
+
+            // Poli dan okupasi
+            'total_poli_aktif' => \App\Models\Poli::count(),
+        ];
+
+        // Data poli untuk dashboard
+        $dataPoli = \App\Models\Poli::all();
+
+        return view('dashboard', compact('lengkapiDataAkun', 'statistik', 'dataPoli'));
     }
 
     public function pendaftaranAkun() {
