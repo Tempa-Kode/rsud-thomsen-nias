@@ -17,6 +17,7 @@ Route::prefix('/pengguna')->middleware(['auth'])->group(function () {
 });
 Route::resource('poli', \App\Http\Controllers\PoliController::class)->middleware(['auth'])->names('poli');
 Route::resource('obat', \App\Http\Controllers\ObatController::class)->middleware(['auth'])->names('obat');
+Route::get('obat-report/download', [\App\Http\Controllers\ObatController::class, 'downloadPDF'])->middleware(['auth'])->name('obat.report.download');
 
 Route::prefix('profile')->middleware(['auth'])->group(function () {
     Route::get('/', [\App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');

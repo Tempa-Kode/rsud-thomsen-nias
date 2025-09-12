@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Obat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class ObatController extends Controller
 {
@@ -117,5 +118,12 @@ class ObatController extends Controller
             DB::rollBack();
             return redirect()->back()->withErrors(['error' => 'Gagal menghapus obat: ' . $e->getMessage()]);
         }
+    }
+
+    public function downloadPDF()
+    {
+        $obat = Obat::all();
+        $pdf = PDF::loadView('obat.report', compact('obat'));
+        return $pdf->stream('data_obat.pdf');
     }
 }
