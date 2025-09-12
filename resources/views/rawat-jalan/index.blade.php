@@ -15,14 +15,14 @@
             @endif
             <div class="card">
                 <div class="d-flex justify-content-between align-items-center p-3">
-                    <div class="d-flex">
+                    <div class="d-flex w-75">
                         <form action="" class="d-inline" method="get">
                             <input type="text" hidden name="bpjs" value="1">
-                            <button type="submit" class="btn btn-sm btn-success">Pasien BPJS</button>
+                            <button type="submit" class="btn btn-success">Pasien BPJS</button>
                         </form>
                         <form action="" method="get">
                             <input type="text" hidden name="bpjs" value="0">
-                            <button type="submit" class="btn btn-sm btn-outline-success ml-2">Pasien Non BPJS</button>
+                            <button type="submit" class="btn btn-outline-success ml-2">Pasien Non BPJS</button>
                         </form>
                     </div>
                     @can('create', App\Models\RawatJalan::class)

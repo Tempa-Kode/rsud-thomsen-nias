@@ -56,4 +56,9 @@ class RawatJalan extends Model
     {
         return $query->where('bpjs', $bpjs);
     }
+
+    public function scopePoli($query, $poli)
+    {
+        return $query->where('poli_id', $poli);
+    }
 }

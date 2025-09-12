@@ -17,9 +17,11 @@ class RawatJalanController extends Controller
     {
         Gate::authorize('viewAny', RawatJalan::class);
         $isBpjs = $request->query('bpjs') ?? true;
+        $queryPoli = $request->query('poli') ?? null;
         if(Auth::user()->role == 'pasien'){
             $rawatJalan = RawatJalan::where('pasien_id', Auth::user()->pasien->id)
                 ->bpjs($isBpjs)
+                // ->poli($queryPoli)
                 ->with('dokter', 'pasien', 'poli')
                 ->orderBy('id', 'desc')
                 ->get();
@@ -27,13 +29,15 @@ class RawatJalanController extends Controller
         } elseif (Auth::user()->role == 'dokter'){
             $rawatJalan = RawatJalan::where('poli_id', Auth::user()->dokter->poli->id)
                 ->bpjs($isBpjs)
+                // ->poli($queryPoli)
                 ->with('dokter', 'pasien', 'poli')
                 ->orderBy('id', 'desc')
                 ->get();
             return view('rawat-jalan.index', compact('rawatJalan'));
         }
         $rawatJalan = RawatJalan::bpjs($isBpjs)->orderBy('id', 'desc')->get();
-        return view('rawat-jalan.index', compact('rawatJalan'));
+        $poli = Poli::all();
+        return view('rawat-jalan.index', compact('rawatJalan', 'poli'));
     }
 
     public function  pilihPendaftaran()
