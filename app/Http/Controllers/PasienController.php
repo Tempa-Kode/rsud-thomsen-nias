@@ -6,6 +6,7 @@ use App\Models\Pasien;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class PasienController extends Controller
 {
@@ -107,5 +108,24 @@ class PasienController extends Controller
             DB::rollBack();
             return redirect()->back()->withErrors(['error' => 'gagal menghapus data pasien: ' . $e->getMessage()]);
         }
+    }
+
+    public function downloadPDF(Request $request)
+    {
+        $bpjs = $request->query('bpjs');
+        $pasien = [];
+
+        if($bpjs == 1){
+            // Pasien BPJS - yang memiliki no_bpjs
+            $pasien = Pasien::whereNotNull('no_bpjs')->get();
+        } else {
+            // Pasien Non-BPJS - yang tidak memiliki no_bpjs
+            $pasien = Pasien::whereNull('no_bpjs')->get();
+        }
+
+        $filename = $bpjs == 1 ? 'laporan-pasien-bpjs.pdf' : 'laporan-pasien-non-bpjs.pdf';
+
+        return PDF::loadView('pasien.report', compact('pasien'))
+            ->stream($filename);
     }
 }

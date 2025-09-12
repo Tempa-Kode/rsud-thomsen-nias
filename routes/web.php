@@ -55,3 +55,7 @@ Route::prefix('pembayaran')->middleware(['auth'])->group(function () {
 });
 
 Route::get('/rekam-medik/{pasienId}', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'cetakRekamMedik'])->middleware(['auth'])->name('rekam-medik.cetak');
+
+Route::prefix('download')->middleware(['auth'])->group(function () {
+    Route::get('pasien-pdf', [\App\Http\Controllers\PasienController::class, 'downloadPDF'])->name('download.pasien.pdf');
+});
