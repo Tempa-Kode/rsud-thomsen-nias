@@ -57,7 +57,9 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->pasien->nik }}</td>
                                     <td>{{ $item->nomor_antrian }}</td>
-                                    <td>{{ $item->pasien->nama }}</td>
+                                    <td>
+                                        <a href="{{ route('rekam-medik.cetak', $item->pasien->id) }}">{{ $item->pasien->nama }}</a>
+                                    </td>
                                     @if(request('bpjs') == '1') <td>{{ $item->pasien->no_bpjs }}</td> @endif
                                     <td>{{ $item->tanggal_kunjungan }}</td>
                                     <td>

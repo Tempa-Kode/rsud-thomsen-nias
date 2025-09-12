@@ -43,7 +43,9 @@
                                         <td>{{ $item->rawatJalan->tanggal_kunjungan }}</td>
                                         <td>{{ $item->rawatJalan->poli->nama_poli }}</td>
                                         <td>{{ $item->rawatJalan->pasien->no_bpjs ?? "Non BPJS" }}</td>
-                                        <td>{{ $item->rawatJalan->pasien->nama }}</td>
+                                        <td>
+                                            <a href="{{ route('rekam-medik.cetak', $item->rawatJalan->pasien->id) }}">{{ $item->rawatJalan->pasien->nama }}</a>
+                                        </td>
                                         <td>Rp. {{ number_format($item->grand_total, 0, ",", ".") }}</td>
                                         <td><span
                                                 class="badge badge-{{ $item->status == "lunas" ? "success" : "warning" }}">{{ $item->status == "lunas" ? "Lunas" : "Belum Lunas" }}</span>

@@ -52,3 +52,5 @@ Route::prefix('pembayaran')->middleware(['auth'])->group(function () {
     Route::put('/bayar/{id}', [\App\Http\Controllers\PembayaranController::class, 'bayar'])->name('pembayaran.bayar');
     Route::get('/struk/{id}', [\App\Http\Controllers\PembayaranController::class, 'strukPembayaran'])->name('pembayaran.struk');
 });
+
+Route::get('/rekam-medik/{pasienId}', [\App\Http\Controllers\RiwayatPemeriksaanController::class, 'cetakRekamMedik'])->middleware(['auth'])->name('rekam-medik.cetak');

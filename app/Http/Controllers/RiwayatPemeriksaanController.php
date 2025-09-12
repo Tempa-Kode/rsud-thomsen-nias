@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\RiwayatPemeriksaan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class RiwayatPemeriksaanController extends Controller
 {
@@ -184,5 +185,20 @@ class RiwayatPemeriksaanController extends Controller
             ->get();
 
         return view('riwayat-pemeriksaan.show', compact('pemeriksaan', 'resep'));
+    }
+
+    public function cetakRekamMedik($pasienId)
+    {
+        $riwayat = RiwayatPemeriksaan::with(
+            'rawatJalan', 'rawatJalan.pasien',
+            'rawatJalan.poli', 'rawatJalan.dokter',
+            'rawatJalan.resepObat'
+        )->whereHas('rawatJalan', function ($q) use ($pasienId) {
+            $q->where('pasien_id', $pasienId);
+            $q->orderBy('tanggal_kunjungan', 'desc');
+        })->get();
+
+        return PDF::loadView('riwayat-pemeriksaan.cetak-rekam-medik', compact('riwayat'))
+            ->stream('rekam-medik-'.$pasienId.'.pdf');
     }
 }

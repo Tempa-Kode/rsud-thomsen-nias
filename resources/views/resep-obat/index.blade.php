@@ -39,7 +39,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ \Carbon\Carbon::parse($item->tanggal_kunjungan)->format('d/m/Y') }}</td>
                                         <td>{{ $item->pasien->nik }}</td>
-                                        <td>{{ $item->pasien->nama }}</td>
+                                        <td>
+                                            <a href="{{ route('rekam-medik.cetak', $item->pasien->id) }}">{{ $item->pasien->nama }}</a>
+                                        </td>
                                         <td>{{ $item->poli->nama_poli }}</td>
                                         <td>{{ $item->dokter->nama ?? '-' }}</td>
                                         <td>{{ $item->resepObat->count() }} jenis obat</td>
