@@ -9,7 +9,7 @@ Route::get('/register', [\App\Http\Controllers\AuthController::class, 'pendaftar
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'prosesDaftar'])->name('proses.register');
 Route::get('/dashboard', [\App\Http\Controllers\AuthController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 Route::prefix('/pengguna')->middleware(['auth'])->group(function () {
-    Route::resource('superadmin', \App\Http\Controllers\SuperAdminController::class)->names('superadmin');
+    Route::resource('superadmin', \App\Http\Controllers\SuperadminController::class)->names('superadmin');
     Route::resource('pimpinan', \App\Http\Controllers\PimpinanController::class)->names('pimpinan');
     Route::resource('dokter', \App\Http\Controllers\DokterController::class)->names('dokter');
     Route::resource('kasir', \App\Http\Controllers\KasirController::class)->names('kasir');
