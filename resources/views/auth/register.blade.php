@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
                     <div class="login-brand">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Logo_kabupaten_nias.png" alt="logo" width="100">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Lambang_kabupaten_nias_barat.jpg" alt="logo" width="100">
                     </div>
 
                     <div class="card card-primary">
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="simple-footer">
-                        Copyright &copy; RSUD Thomsen Nias 2025
+                        Copyright &copy; RS Pramata Nias Barat
                     </div>
                 </div>
             </div>

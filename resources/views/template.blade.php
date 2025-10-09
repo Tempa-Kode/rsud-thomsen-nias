@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>@yield('title') &mdash; RSUD Thomsen</title>
+    <title>@yield('title') &mdash; RS Pratama Nias Barat</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -59,10 +59,10 @@
         <div class="main-sidebar sidebar-style-2">
             <aside id="sidebar-wrapper">
                 <div class="sidebar-brand">
-                    <a href="index.html">RSUD Thomsen</a>
+                    <a href="{{ route('dashboard') }}">RS Pratama Nias Barat</a>
                 </div>
                 <div class="sidebar-brand sidebar-brand-sm">
-                    <a href="index.html">RST</a>
+                    <a href="{{ route('dashboard') }}">RSP</a>
                 </div>
                 <ul class="sidebar-menu">
                     @switch(Auth::user()->role)
@@ -106,7 +106,7 @@
         </div>
         <footer class="main-footer">
             <div class="footer-left">
-                Copyright &copy; 2025 <div class="bullet"></div> RSUD <a href="https://nauv.al/">Thomsen Nias</a>
+                Copyright &copy; 2025 <div class="bullet"></div> RS Pratama Nias Barat
             </div>
             <div class="footer-right">
                 1.0.0
