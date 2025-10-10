@@ -3,6 +3,11 @@
 @section("header", "Detail Pemeriksaan")
 
 @section("body")
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -96,7 +101,10 @@
                     @endif
 
 
-                    <a href="{{ route("riwayat-pemeriksaan.index") }}" class="btn btn-secondary">Kembali</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+                    @if (!$hasSuratRujukan)
+                        <a href="{{ route("surat-rujukan.buat", $pemeriksaan->id) }}" class="btn btn-primary ml-2">Berikan Rujukan</a>
+                    @endif
                 </div>
             </div>
         </div>

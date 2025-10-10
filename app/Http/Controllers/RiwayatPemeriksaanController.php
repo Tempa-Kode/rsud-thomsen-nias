@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Obat;
-use App\Models\RawatJalan;
 use App\Models\ResepObat;
+use App\Models\RawatJalan;
+use App\Models\SuratRujukan;
 use Illuminate\Http\Request;
 use App\Models\RiwayatPemeriksaan;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class RiwayatPemeriksaanController extends Controller
@@ -184,7 +185,9 @@ class RiwayatPemeriksaanController extends Controller
             ->with('obat')
             ->get();
 
-        return view('riwayat-pemeriksaan.show', compact('pemeriksaan', 'resep'));
+        $hasSuratRujukan = SuratRujukan::where('riwayat_pemeriksaan_id', $pemeriksaan->id)->exists();
+
+        return view('riwayat-pemeriksaan.show', compact('pemeriksaan', 'resep', 'hasSuratRujukan'));
     }
 
     public function cetakRekamMedik($pasienId)

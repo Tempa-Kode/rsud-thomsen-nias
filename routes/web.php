@@ -63,3 +63,10 @@ Route::get('/rekam-medik/{pasienId}', [\App\Http\Controllers\RiwayatPemeriksaanC
 Route::prefix('download')->middleware(['auth'])->group(function () {
     Route::get('pasien-pdf', [\App\Http\Controllers\PasienController::class, 'downloadPDF'])->name('download.pasien.pdf');
 });
+
+Route::get('/rujukan', [\App\Http\Controllers\SuratRujukanController::class, 'index'])->middleware(['auth'])->name('surat-rujukan.index');
+Route::get('/buat-rujukan/{riwayatPemeriksaanId}', [\App\Http\Controllers\SuratRujukanController::class, 'buatRujukan'])->middleware(['auth'])->name('surat-rujukan.buat');
+Route::post('/simpan-rujukan', [\App\Http\Controllers\SuratRujukanController::class, 'simpanRujukan'])->middleware(['auth'])->name('surat-rujukan.simpan');
+Route::get('/terbitkan-rujukan/{id}', [\App\Http\Controllers\SuratRujukanController::class, 'terbitkanRujukan'])->middleware(['auth'])->name('surat-rujukan.terbit');
+Route::put('/simpan-terbitan/{id}', [\App\Http\Controllers\SuratRujukanController::class, 'simpanTerbitan'])->middleware(['auth'])->name('surat-rujukan.simpan-terbitan');
+Route::get('/cetak-rujukan/{id}', [\App\Http\Controllers\SuratRujukanController::class, 'cetakRujukan'])->middleware(['auth'])->name('surat-rujukan.cetak');

@@ -7,3 +7,4 @@
 <li class="{{ Route::currentRouteName() == 'rawat-jalan.index' ? 'active' : '' }}"><a class="nav-link" href="{{ route('rawat-jalan.index') }}"><i class="fas fa-file-medical"></i> <span>Rawat Jalan</span></a></li>
 <li class="{{ Route::currentRouteName() == 'riwayat-pemeriksaan.index' ? 'active' : '' }}"><a class="nav-link" href="{{ route('riwayat-pemeriksaan.index') }}"><i class="fas fa-notes-medical"></i> <span>Pemeriksaan</span></a></li>
 <li class="{{ Route::currentRouteName() == 'resep-obat.index' ? 'active' : '' }}"><a class="nav-link" href="{{ route('resep-obat.index') }}"><i class="fas fa-pills"></i> <span>Resep Obat</span></a></li>
+<li class="{{ Route::currentRouteName() == 'surat-rujukan.index' ? 'active' : '' }}"><a class="nav-link" href="{{  route('surat-rujukan.index') }}"><i class="fas fa-envelope"></i> <span>Surat Rujukan</span></a></li>

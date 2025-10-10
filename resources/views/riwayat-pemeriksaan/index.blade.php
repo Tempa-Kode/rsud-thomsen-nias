@@ -33,6 +33,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>No Rekam Medik</th>
+                                    <th>Tgl Kunjungan</th>
                                     <th>NIK</th>
                                     <th>Nama Pasien</th>
                                     @if (request("bpjs") == "1")
@@ -49,6 +50,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->rawatJalan->nomor_rekam_medik ?? "-" }}</td>
+                                        <td>{{ $item->rawatJalan->tanggal_kunjungan ?? "-" }}</td>
                                         <td>{{ $item->rawatJalan->pasien->nik }}</td>
                                         <td>
                                             <a href="{{ route('rekam-medik.cetak', $item->rawatJalan->pasien->id) }}">{{ $item->rawatJalan->pasien->nama }}</a>

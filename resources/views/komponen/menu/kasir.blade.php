@@ -5,3 +5,4 @@
 <li class=""><a class="nav-link" href="{{ route('riwayat-pemeriksaan.index') }}"><i class="fas fa-notes-medical"></i> <span>Pemeriksaan</span></a></li>
 <li class="{{ str_contains(Route::currentRouteName(), 'resep-obat') ? 'active' : '' }}"><a class="nav-link" href="{{ route('resep-obat.index') }}"><i class="fas fa-pills"></i> <span>Resep Obat</span></a></li>
 <li class="{{ Route::currentRouteName() == 'pembayaran.index' ? 'active' : '' }}"><a class="nav-link" href="{{  route('pembayaran.index') }}"><i class="fas fa-money-bill-wave"></i> <span>Pembayaran</span></a></li>
+<li class="{{ Route::currentRouteName() == 'surat-rujukan.index' ? 'active' : '' }}"><a class="nav-link" href="{{  route('surat-rujukan.index') }}"><i class="fas fa-envelope"></i> <span>Surat Rujukan</span></a></li>
