@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    font-size: 12px;
+}
+.header-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.header-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+}
+.logo {
+    width: 80px;
+    height: 80px;
+}
+.header-text {
+    font-weight: bold;
+    font-size: 14px;
+}

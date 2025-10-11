@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SuratRujukan;
 use Illuminate\Http\Request;
 use App\Models\RiwayatPemeriksaan;
-use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SuratRujukanController extends Controller
 {
@@ -78,6 +78,12 @@ class SuratRujukanController extends Controller
     public function cetakRujukan($id)
     {
         $suratRujukan = SuratRujukan::with(['pasien', 'dokter', 'riwayatPemeriksaan.rawatJalan.pasien'])->findOrFail($id);
-        return "Data";
+
+        $data = ['suratRujukan' => $suratRujukan];
+
+        $pdf = Pdf::loadView('surat-rujukan.cetak', $data)
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->stream("Surat_Rujukan_{$suratRujukan->riwayatPemeriksaan->rawatJalan->pasien->nama}.pdf");
     }
 }
