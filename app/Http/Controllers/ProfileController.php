@@ -119,13 +119,21 @@ class ProfileController extends Controller
             'jenis_kelamin' => 'required|in:L,P',
             'tempat_lahir' => 'required|string|max:50',
             'tanggal_lahir' => 'required|date',
-            'alamat' => 'nullable|string'
+            'alamat' => 'nullable|string',
+            'jam_mulai_kerja' => 'required|date_format:H:i',
+            'jam_selesai_kerja' => 'required|date_format:H:i|after:jam_mulai_kerja',
+            'hari_kerja' => 'required|min:1',
         ], [
             'nama.required' => 'Nama harus diisi.',
             'jenis_kelamin.required' => 'Jenis kelamin harus dipilih.',
             'tempat_lahir.required' => 'Tempat lahir harus diisi.',
             'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
             'alamat.string' => 'Alamat harus berupa teks.',
+            'jam_mulai_kerja.required' => 'Jam mulai kerja harus diisi.',
+            'jam_selesai_kerja.required' => 'Jam selesai kerja harus diisi.',
+            'jam_selesai_kerja.after' => 'Jam selesai kerja harus setelah jam mulai kerja.',
+            'hari_kerja.required' => 'Hari kerja harus diisi.',
+            'hari_kerja.min' => 'Hari kerja minimal 1 hari.',
         ]);
 
         try {
@@ -162,7 +170,26 @@ class ProfileController extends Controller
             'jenis_kelamin' => 'required|in:L,P',
             'tempat_lahir' => 'required|string|max:50',
             'tanggal_lahir' => 'required|date',
-            'alamat' => 'nullable|string'
+            'alamat' => 'nullable|string',
+            'jam_mulai_kerja' => 'required|date_format:H:i',
+            'jam_selesai_kerja' => 'required|date_format:H:i|after:jam_mulai_kerja',
+            'hari_kerja' => 'required|min:1',
+        ], [
+            'nip.required' => 'NIP harus diisi.',
+            'nip.unique' => 'NIP sudah terdaftar.',
+            'nama.required' => 'Nama harus diisi.',
+            'nama.unique' => 'Nama sudah terdaftar.',
+            'poli_id.required' => 'Poli harus dipilih.',
+            'poli_id.exists' => 'Poli yang dipilih tidak valid.',
+            'jenis_kelamin.required' => 'Jenis kelamin harus dipilih.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
+            'alamat.string' => 'Alamat harus berupa teks.',
+            'jam_mulai_kerja.required' => 'Jam mulai kerja harus diisi.',
+            'jam_selesai_kerja.required' => 'Jam selesai kerja harus diisi.',
+            'jam_selesai_kerja.after' => 'Jam selesai kerja harus setelah jam mulai kerja.',
+            'hari_kerja.required' => 'Hari kerja harus diisi.',
+            'hari_kerja.min' => 'Hari kerja minimal 1 hari.',
         ]);
 
         try {

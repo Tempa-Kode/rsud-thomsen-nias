@@ -48,6 +48,17 @@
                             <div class="col-sm-4 font-weight-bold">Alamat</div>
                             <div class="col-sm-8">{{ $dokter->dokter->alamat ?? "Data belum di isi" }}</div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 font-weight-bold">Jam Kerja</div>
+                            <div class="col-sm-8">
+                                {{ $dokter->dokter->jam_mulai_kerja ? \Carbon\Carbon::parse($dokter->dokter->jam_mulai_kerja)->format('H:i') : "Data belum di isi" }} -
+                                {{ $dokter->dokter->jam_selesai_kerja ? \Carbon\Carbon::parse($dokter->dokter->jam_selesai_kerja)->format('H:i') : "Data belum di isi" }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 font-weight-bold">Hari Kerja</div>
+                            <div class="col-sm-8">{{ $dokter->dokter->hari_kerja ?? "Data belum di isi" }}</div>
+                        </div>
                     </div>
                 </div>
                 <a href="{{ route('dokter.index') }}" class="btn btn-secondary mt-4"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>

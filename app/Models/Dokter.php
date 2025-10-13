@@ -17,6 +17,9 @@ class Dokter extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'alamat',
+        'jam_mulai_kerja',
+        'jam_selesai_kerja',
+        'hari_kerja',
     ];
 
     public $timestamps = false;

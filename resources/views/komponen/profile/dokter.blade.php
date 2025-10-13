@@ -102,6 +102,37 @@
                 @enderror
             </div>
         </div>
+        <div class="row">
+            <div class="form-group col-md-6 col-12">
+                <label for="jam_mulai_kerja">Jam Mulai Kerja</label>
+                <input type="time" class="form-control @error('jam_mulai_kerja') is-invalid @enderror" required="" name="jam_mulai_kerja" id="jam_mulai_kerja" value="{{ old('jam_mulai_kerja', $relasiData->jam_mulai_kerja ?? '') }}" placeholder="Belum diisi" step="60">
+                @error('jam_mulai_kerja')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group col-md-6 col-12">
+                <label for="jam_selesai_kerja">Jam Selesai Kerja</label>
+                <input type="time" class="form-control @error('jam_selesai_kerja') is-invalid @enderror" required="" name="jam_selesai_kerja" id="jam_selesai_kerja" value="{{ old('jam_selesai_kerja', $relasiData->jam_selesai_kerja ?? '') }}" placeholder="Belum diisi" step="60">
+                @error('jam_selesai_kerja')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-12">
+                <label>Hari Kerja</label>
+                <textarea class="form-control summernote-simple @error('hari_kerja') is-invalid @enderror" rows="5" name="hari_kerja" id="hari_kerja">{{ old('hari_kerja', $relasiData->hari_kerja ?? '-') }}</textarea>
+                @error('hari_kerja')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+        </div>
     </div>
     <div class="card-footer text-right">
         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
