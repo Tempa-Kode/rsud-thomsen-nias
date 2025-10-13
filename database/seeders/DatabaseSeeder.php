@@ -15,35 +15,35 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'username' => 'superadmin',
-            'email' => 'superadmin@thomsen.go.id',
+            'email' => 'superadmin@pratamanisbar.go.id',
             'password' => bcrypt('superadmin'),
             'role' => 'superadmin',
         ]);
 
         User::create([
             'username' => 'pimpinan',
-            'email' => 'pimpinan@thomsen.go.id',
+            'email' => 'pimpinan@pratamanisbar.go.id',
             'password' => bcrypt('pimpinan'),
             'role' => 'pimpinan',
         ]);
 
         User::create([
             'username' => 'kasir',
-            'email' => 'kasir@thomesen.go.id',
+            'email' => 'kasir@pratamanisbar.go.id',
             'password' => bcrypt('kasir'),
             'role' => 'kasir',
         ]);
 
         User::create([
             'username' => 'dokter',
-            'email' => 'dokter@thomsen.go.id',
+            'email' => 'dokter@pratamanisbar.go.id',
             'password' => bcrypt('dokter'),
             'role' => 'dokter',
         ]);
 
         User::create([
             'username' => 'pasien',
-            'email' => 'pasien@thomsen.go.id',
+            'email' => 'pasien@pratamanisbar.go.id',
             'password' => bcrypt('pasien'),
             'role' => 'pasien',
         ]);
