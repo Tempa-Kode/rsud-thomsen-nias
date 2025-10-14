@@ -40,10 +40,10 @@
             </td>
             <td style="width: 60%;" class="header-text">
                 <div>PEMERINTAH KABUPATEN NIAS BARAT</div>
-                <div>DINAS KESEHATAN</div>
-                <div>UPTD PUSKESMAS HILISALAWA'AHE</div>
-                <div style="font-size: 10px;">Desa maluo Kecamatan Hilisalawa'ahe Kabupaten Nias Selatan Kode Pos 22864</div>
-                <div style="font-size: 10px;">E-mail : hilisalawaahe@gmail.com</div>
+                <div>RUMAH SAKIT PRATAMA</div>
+                {{-- <div>UPTD PUSKESMAS HILISALAWA'AHE</div> --}}
+                <div style="font-size: 10px;">Jalan Budi Utomo - Lahomi Kode Pos 22863</div>
+                <div style="font-size: 10px;">E-mail : rspratamaniasbarat@gmail.com</div>
             </td>
             <td style="width: 20%;">
                 <img src="{{ public_path('assets/img/logo/kemenkes.png') }}" width="90" alt="Logo Kemenkes">
