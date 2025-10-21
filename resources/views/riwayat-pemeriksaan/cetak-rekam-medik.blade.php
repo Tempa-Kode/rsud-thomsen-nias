@@ -25,49 +25,23 @@
             background-color: white;
         }
 
-        .header {
-            text-align: center;
-            border: 2px solid #000;
-            padding: 15px;
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 20px;
-            position: relative;
         }
-
-        .logo-left {
-            position: absolute;
-            left: 20px;
-            top: 15px;
+        .header-table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px;
+        }
+        .logo {
             width: 80px;
             height: 80px;
         }
-
-        .logo-right {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            width: 80px;
-            height: 80px;
-        }
-
-        .hospital-name {
-            font-size: 24px;
+        .header-text {
             font-weight: bold;
-            color: #2c5f2d;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-
-        .hospital-address {
             font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .divider {
-            border-top: 3px solid #000;
-            border-bottom: 1px solid #000;
-            height: 4px;
-            margin: 15px 0;
         }
 
         .title {
@@ -170,24 +144,26 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        {{-- <div class="logo-left">
-            <div class="logo-placeholder">
-                LOGO<br>PEMKAB<br>NIAS BARAT
-            </div>
-        </div>
+    <table class="header-table">
+        <tr>
+            <td style="width: 20%;">
+                <img src="{{ public_path('assets/img/logo/logo-nisbar.png') }}" width="80" alt="Logo Nias Barat">
+            </td>
+            <td style="width: 60%;" class="header-text">
+                <div>PEMERINTAH KABUPATEN NIAS BARAT</div>
+                <div>RUMAH SAKIT PRATAMA</div>
+                {{-- <div>UPTD PUSKESMAS HILISALAWA'AHE</div> --}}
+                <div style="font-size: 10px;">Jalan Budi Utomo - Lahomi Kode Pos 22863</div>
+                <div style="font-size: 10px;">E-mail : rspratamaniasbarat@gmail.com</div>
+            </td>
+            <td style="width: 20%;">
+                <img src="{{ public_path('assets/img/logo/kemenkes.png') }}" width="90" alt="Logo Kemenkes">
+            </td>
+        </tr>
+    </table>
 
-        <div class="logo-right">
-            <div class="logo-placeholder">
-                LOGO<br>RSUD
-            </div>
-        </div> --}}
-
-        <div class="hospital-name">RS UMUM Daerah dr. M. THOMSEN NIAS</div>
-        <div class="hospital-address">Jl. Dr. Cipto Mangunkusumo No.15, Kelurahan Pasar, Kec. Gunungsitoli, Kota Gunungsitoli, Sumatera Utara</div>
-
-        <div class="divider"></div>
-    </div>
+    <!-- Garis pemisah -->
+    <div style="border-top: 3px solid black; margin: 10px 0;"></div>
 
     <div class="title">RIWAYAT REKAM MEDIK</div>
 

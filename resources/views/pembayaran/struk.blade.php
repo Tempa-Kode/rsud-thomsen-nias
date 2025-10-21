@@ -12,22 +12,23 @@
             padding: 20px;
         }
 
-        .header {
-            text-align: center;
-            border: 2px solid #000;
-            padding: 15px;
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 20px;
         }
-
-        .hospital-name {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .header-table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px;
         }
-
-        .hospital-address {
-            font-size: 12px;
-            margin-bottom: 15px;
+        .logo {
+            width: 80px;
+            height: 80px;
+        }
+        .header-text {
+            font-weight: bold;
+            font-size: 14px;
         }
 
         .title {
@@ -128,13 +129,25 @@
 </head>
 
 <body>
-    <div class="header">
-        <div class="hospital-name">RS UMUM Daerah dr. M. THOMSEN NIAS</div>
-        <div class="hospital-address">
-            Jl. Dr. Cipto Mangunkusumo No.15, Kelurahan Pasar, Kec. Gunungsitoli, Kota Gunungsitoli, Sumatera Utara
-        </div>
-        <div class="title">STRUK PEMBAYARAN</div>
-    </div>
+    <table class="header-table">
+        <tr>
+            <td style="width: 20%;">
+                <img src="{{ public_path('assets/img/logo/logo-nisbar.png') }}" width="80" alt="Logo Nias Barat">
+            </td>
+            <td style="width: 60%;" class="header-text">
+                <div>PEMERINTAH KABUPATEN NIAS BARAT</div>
+                <div>RUMAH SAKIT PRATAMA</div>
+                {{-- <div>UPTD PUSKESMAS HILISALAWA'AHE</div> --}}
+                <div style="font-size: 10px;">Jalan Budi Utomo - Lahomi Kode Pos 22863</div>
+                <div style="font-size: 10px;">E-mail : rspratamaniasbarat@gmail.com</div>
+            </td>
+            <td style="width: 20%;">
+                <img src="{{ public_path('assets/img/logo/kemenkes.png') }}" width="90" alt="Logo Kemenkes">
+            </td>
+        </tr>
+    </table>
+
+    <div style="border-top: 3px solid black; margin: 10px 0;"></div>
 
     <div class="patient-info">
         <div class="info-row">
