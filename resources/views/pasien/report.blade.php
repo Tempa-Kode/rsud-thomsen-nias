@@ -14,8 +14,7 @@
             padding: 20px;
         }
 
-        .header {
-            /* border: 3px solid black; */
+        /* .header {
             padding: 15px;
             margin-bottom: 20px;
             text-align: center;
@@ -107,6 +106,25 @@
             font-size: 13px;
             margin: 5px 0;
             color: black;
+        } */
+         .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border: none;
+        }
+        .header-table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+        }
+        .header-text {
+            font-weight: bold;
+            font-size: 14px;
         }
 
         .title-section {
@@ -123,14 +141,14 @@
             text-decoration: underline;
         }
 
-        table {
+        #data-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
 
-        th,
-        td {
+        #data-table th,
+        #data-table td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
@@ -138,7 +156,7 @@
             font-size: 11px;
         }
 
-        th {
+        #data-table th {
             background-color: #f0f0f0;
             font-weight: bold;
             text-align: center;
@@ -195,7 +213,7 @@
 
 <body>
     <!-- Header dengan Logo -->
-    <div class="header">
+    {{-- <div class="header">
         <table style="width: 100%; border: none;">
             <tr>
                 <td style="text-align: center; border: none; vertical-align: middle;">
@@ -206,7 +224,24 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </div> --}}
+    <table class="header-table">
+        <tr>
+            <td style="width: 20%;">
+                <img src="{{ public_path('assets/img/logo/logo-nisbar.png') }}" width="80" alt="Logo Nias Barat">
+            </td>
+            <td style="width: 60%;" class="header-text">
+                <div>PEMERINTAH KABUPATEN NIAS BARAT</div>
+                <div>RUMAH SAKIT PRATAMA</div>
+                {{-- <div>UPTD PUSKESMAS HILISALAWA'AHE</div> --}}
+                <div style="font-size: 10px;">Jalan Budi Utomo - Lahomi Kode Pos 22863</div>
+                <div style="font-size: 10px;">E-mail : rspratamaniasbarat@gmail.com</div>
+            </td>
+            <td style="width: 20%;">
+                <img src="{{ public_path('assets/img/logo/kemenkes.png') }}" width="90" alt="Logo Kemenkes">
+            </td>
+        </tr>
+    </table>
 
     <!-- Garis pemisah -->
     <div style="border-top: 3px solid black; margin: 10px 0;"></div>
@@ -220,7 +255,7 @@
     </div>
 
     <!-- Tabel Data Pasien -->
-    <table>
+    <table id="data-table">
         <thead>
             <tr>
                 <th class="no-column">No</th>
