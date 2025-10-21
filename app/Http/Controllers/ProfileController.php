@@ -120,20 +120,12 @@ class ProfileController extends Controller
             'tempat_lahir' => 'required|string|max:50',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'nullable|string',
-            'jam_mulai_kerja' => 'required|date_format:H:i',
-            'jam_selesai_kerja' => 'required|date_format:H:i|after:jam_mulai_kerja',
-            'hari_kerja' => 'required|min:1',
         ], [
             'nama.required' => 'Nama harus diisi.',
             'jenis_kelamin.required' => 'Jenis kelamin harus dipilih.',
             'tempat_lahir.required' => 'Tempat lahir harus diisi.',
             'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
             'alamat.string' => 'Alamat harus berupa teks.',
-            'jam_mulai_kerja.required' => 'Jam mulai kerja harus diisi.',
-            'jam_selesai_kerja.required' => 'Jam selesai kerja harus diisi.',
-            'jam_selesai_kerja.after' => 'Jam selesai kerja harus setelah jam mulai kerja.',
-            'hari_kerja.required' => 'Hari kerja harus diisi.',
-            'hari_kerja.min' => 'Hari kerja minimal 1 hari.',
         ]);
 
         try {

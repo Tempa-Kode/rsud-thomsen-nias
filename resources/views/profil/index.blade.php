@@ -17,6 +17,16 @@
             Ubah informasi tentang diri Anda di halaman ini.
         </p>
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row mt-sm-4">
             <div class="col-12 col-md-12 col-lg-5">
                 <div class="card profile-widget">
