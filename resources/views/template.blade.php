@@ -61,7 +61,11 @@
         <div class="main-sidebar sidebar-style-2">
             <aside id="sidebar-wrapper">
                 <div class="sidebar-brand">
-                    <a href="{{ route('dashboard') }}">RS Pratama Nias Barat</a>
+                    <a href="{{ route('dashboard') }}">
+                        <img src="{{ asset('assets/img/logo/logo-nisbar.png') }}" alt="logo" width="30" height="30" class="d-inline-block align-top mt-2 mr-2" style="margin-top: ">
+                        RS Pratama
+                        <img src="{{ asset('assets/img/logo/kemenkes.png') }}" alt="logo" width="30" height="30" class="d-inline-block align-top mt-2 mr-2" style="margin-top: ">
+                    </a>
                 </div>
                 <div class="sidebar-brand sidebar-brand-sm">
                     <a href="{{ route('dashboard') }}">RSP</a>
