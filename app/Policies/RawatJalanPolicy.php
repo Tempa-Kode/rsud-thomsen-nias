@@ -36,6 +36,13 @@ class RawatJalanPolicy
             : Response::deny('anda tidak memiliki akses untuk membuat data rawat jalan.');
     }
 
+    public function downloadReport(User $user): Response
+    {
+        return $user->role === 'kasir' || $user->role == 'pimpinan'|| $user->role == 'dokter'
+            ? Response::allow()
+            : Response::deny('anda tidak memiliki akses untuk mendownload data rawat jalan.');
+    }
+
     /**
      * Determine whether the user can update the model.
      */

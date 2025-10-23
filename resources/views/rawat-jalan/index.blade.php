@@ -13,6 +13,15 @@
                     </button>
                 </div>
             @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="card">
                 <div class="d-flex justify-content-between align-items-center p-3">
                     <div class="d-flex w-75">
@@ -25,6 +34,48 @@
                             <button type="submit" class="btn btn-outline-success ml-2">Pasien Non BPJS</button>
                         </form>
                     </div>
+                    @can('downloadReport', App\Models\RawatJalan::class)
+                        <div class="d-flex">
+                            <form action="{{ route('rawat-jalan.download-report') }}" method="get" class="d-flex align-items-end">
+                                <div class="form-group">
+                                    <label>Periode Awal</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control datepicker" name="periode_awal">
+                                    </div>
+                                </div>
+                                <div class="form-group ml-3">
+                                    <label>Periode Akhir</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-calendar"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" class="form-control datepicker" name="periode_akhir">
+                                    </div>
+                                </div>
+                                <div class="form-group ml-3">
+                                    <label>Poli</label>
+                                    <select name="poli_id" id="poli_id" class="form-control">
+                                        <option value="">-- Pilih Poli --</option>
+                                        @forelse($poli as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama_poli }}</option>
+                                        @empty
+                                            <option value="">Tidak ada poli tersedia</option>
+                                        @endforelse
+                                    </select>
+                                </div>
+                                <div class="form-group ml-3">
+                                    <button type="submit" class="btn btn-outline-success d-inline">Download</button>
+                                </div>
+                            </form>
+                        </div>
+                    @endcan
                     @can('create', App\Models\RawatJalan::class)
                     <div class="pt-3 pl-3">
                         <a href="{{ route('rawat-jalan.pilih-pendaftaran') }}" class="btn btn-primary">Daftar Rawat Jalan</a>
@@ -99,3 +150,9 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script src="{{ asset('node_modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/page/forms-advanced-forms.js') }}"></script>
+@endpush

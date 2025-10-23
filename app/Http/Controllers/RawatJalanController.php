@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function PHPUnit\Framework\isEmpty;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class RawatJalanController extends Controller
 {
@@ -86,6 +86,42 @@ class RawatJalanController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors(['error' => 'gagal melakukan pendaftaran, silahkan coba lagi.']);
+        }
+    }
+
+    public function downloadReport(Request $request)
+    {
+        $validasi = $request->validate([
+            'periode_awal' => 'required|date',
+            'periode_akhir' => 'required|date',
+            'poli_id' => 'nullable',
+        ], [
+            'periode_awal.required' => 'Periode awal harus diisi.',
+            'periode_akhir.required' => 'Periode akhir harus diisi.',
+        ]);
+
+        try {
+            $data = RawatJalan::whereBetween('tanggal_kunjungan', [$validasi['periode_awal'], $validasi['periode_akhir']])
+                ->when($request->filled('poli_id'), function ($query) use ($validasi) {
+                    $query->where('poli_id', $validasi['poli_id']);
+                })
+                ->with('dokter', 'pasien', 'poli', 'riwayatPemeriksaan', 'pembayaran')
+                ->orderBy('tanggal_kunjungan', 'asc')
+                ->get();
+
+            if ($data->isEmpty()) {
+                return redirect()->back()->with('error', 'Tidak ada data pada periode yang dipilih.');
+            }
+
+            $poli = $data->first()->poli->nama_poli ?? 'Semua Poli';
+
+            $periode = date('d M Y', strtotime($validasi['periode_awal'])) . ' - ' . date('d M Y', strtotime($validasi['periode_akhir']));
+
+            $pdf = PDF::loadView('rawat-jalan.report', compact('data', 'poli', 'periode'));
+            return $pdf->stream('data-rawatjalan.pdf');
+        } catch (\Exception $e) {
+            \Log::error('PDF Generation Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Gagal mengunduh laporan: ' . $e->getMessage());
         }
     }
 }
