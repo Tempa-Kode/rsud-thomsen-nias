@@ -14,40 +14,20 @@
             padding: 20px;
         }
 
-        .header {
-            /* border: 3px solid black; */
-            padding: 15px;
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 20px;
+            border: none;
         }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            width: 80px;
-            height: 80px;
-        }
-
-        .header-text {
+        .header-table td {
             text-align: center;
-            flex: 1;
-            margin: 0 20px;
+            vertical-align: middle;
+            padding: 10px;
         }
-
-        .header-text h1 {
-            font-size: 24px;
+        .header-text {
             font-weight: bold;
-            margin: 0;
-            color: black;
-        }
-
-        .header-text p {
             font-size: 14px;
-            margin: 5px 0;
-            color: black;
         }
 
         .title-section {
@@ -64,21 +44,21 @@
             text-decoration: underline;
         }
 
-        table {
+        .table-data {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
 
-        th,
-        td {
+        .table-data th,
+        .table-data td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
             vertical-align: middle;
         }
 
-        th {
+        .table-data th {
             background-color: #f0f0f0;
             font-weight: bold;
             text-align: center;
@@ -132,18 +112,23 @@
 
 <body>
     <!-- Header dengan Logo -->
-    <div class="header">
-        <table style="width: 100%; border: none;">
-            <tr>
-                <td style="text-align: center; border: none; vertical-align: middle;">
-                    <h1 style="margin: 0; font-size: 22px; font-weight: bold;">RS UMUM Daerah dr. M. THOMSEN NIAS</h1>
-                    <p style="margin: 5px 0; font-size: 13px;">
-                        Jl. Dr. Cipto Mangunkusumo No.15, Kelurahan Pasar, Kec. Gunungsitoli, Kota Gunungsitoli, Sumatera Utara
-                    </p>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <table class="header-table">
+        <tr>
+            <td style="width: 20%;">
+                <img src="{{ public_path('assets/img/logo/logo-nisbar.png') }}" width="80" alt="Logo Nias Barat">
+            </td>
+            <td style="width: 60%;" class="header-text">
+                <div>PEMERINTAH KABUPATEN NIAS BARAT</div>
+                <div>RUMAH SAKIT PRATAMA</div>
+                {{-- <div>UPTD PUSKESMAS HILISALAWA'AHE</div> --}}
+                <div style="font-size: 10px;">Jalan Budi Utomo - Lahomi Kode Pos 22863</div>
+                <div style="font-size: 10px;">E-mail : rspratamaniasbarat@gmail.com</div>
+            </td>
+            <td style="width: 20%;">
+                <img src="{{ public_path('assets/img/logo/kemenkes.png') }}" width="90" alt="Logo Kemenkes">
+            </td>
+        </tr>
+    </table>
 
     <!-- Garis pemisah -->
     <div style="border-top: 3px solid black; margin: 10px 0;"></div>
@@ -154,7 +139,7 @@
     </div>
 
     <!-- Tabel Data Obat -->
-    <table>
+    <table class="table-data">
         <thead>
             <tr>
                 <th class="no-column">No</th>
