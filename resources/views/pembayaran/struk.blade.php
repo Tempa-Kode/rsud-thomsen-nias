@@ -247,7 +247,7 @@
                             <td class="center">{{ $index + 1 }}</td>
                             <td>{{ $resep->obat->nama_obat ?? "-" }}</td>
                             <td>{{ $resep->obat->jenis_obat ?? "-" }}</td>
-                            <td>{{ $resep->aturan_pakai ?? "-" }}</td>
+                            <td>{{ $resep->obat->aturan_pakai ?? "-" }}</td>
                             <td class="right">{{ number_format($hargaObat, 0, ",", ".") }}</td>
                             <td class="center">{{ $jumlah }}</td>
                             <td class="right">{{ number_format($subtotal, 0, ",", ".") }}</td>

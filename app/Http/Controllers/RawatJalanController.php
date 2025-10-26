@@ -33,7 +33,8 @@ class RawatJalanController extends Controller
                 ->with('dokter', 'pasien', 'poli')
                 ->orderBy('id', 'desc')
                 ->get();
-            return view('rawat-jalan.index', compact('rawatJalan'));
+                $poli = Poli::all();
+            return view('rawat-jalan.index', compact('rawatJalan', 'poli'));
         }
         $rawatJalan = RawatJalan::bpjs($isBpjs)->orderBy('id', 'desc')->get();
         $poli = Poli::all();

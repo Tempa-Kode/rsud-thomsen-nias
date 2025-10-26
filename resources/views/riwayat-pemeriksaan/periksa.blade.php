@@ -98,79 +98,73 @@
                         </div>
                         <hr>
                         <h5>Resep Obat</h5>
-                        <div id="prescription-container">
-                            <div class="prescription-item">
-                                <div class="d-flex justify-content-end mb-2">
-                                    <button type="button" class="btn btn-sm btn-danger delete-prescription"
-                                        title="Hapus item">
-                                        <i class="fas fa-trash"></i> Hapus
-                                    </button>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="obat-0" class="col-sm-3 col-form-label">Obat</label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control select2" name="obat[]" id="obat-0">
-                                            <option value="" hidden>Pilih Obat</option>
-                                            @foreach ($obat as $item)
-                                                <option value="{{ $item->id }}"
-                                                    {{ in_array($item->id, old("obat", [])) ? "selected" : "" }}>
-                                                    {{ $item->nama_obat }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="jumlah-0" class="col-sm-3 col-form-label">Jumlah</label>
-                                    <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="jumlah-0" name="jumlah[]"
-                                            value="{{ old("jumlah.0") }}">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="keterangan-0" class="col-sm-3 col-form-label">Keterangan</label>
-                                    <div class="col-sm-9">
-                                        <textarea class="form-control" name="keterangan[]" id="keterangan-0" cols="30" rows="10">{{ trim(old("keterangan.0")) }}</textarea>
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="prescription-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">No</th>
+                                        <th width="35%">Obat</th>
+                                        <th width="15%">Jumlah</th>
+                                        <th width="35%">Keterangan</th>
+                                        <th width="10%">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="prescription-container">
+                                    <tr class="prescription-item">
+                                        <td class="text-center align-middle">1</td>
+                                        <td>
+                                            <select class="form-control select2" name="obat[]" id="obat-0" style="width: 100%">
+                                                <option value="" hidden>Pilih Obat</option>
+                                                @foreach ($obat as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ in_array($item->id, old("obat", [])) ? "selected" : "" }}>
+                                                        {{ $item->nama_obat }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="jumlah-0" name="jumlah[]"
+                                                value="{{ old("jumlah.0") }}" min="1">
+                                        </td>
+                                        <td>
+                                            <textarea class="form-control" name="keterangan[]" id="keterangan-0" rows="2">{{ trim(old("keterangan.0")) }}</textarea>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <button type="button" class="btn btn-sm btn-danger delete-prescription"
+                                                title="Hapus item">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                         <!-- Template (clean) untuk item resep baru -->
                         <template id="prescription-item-template">
-                            <div class="prescription-item">
-                                <div class="d-flex justify-content-end mb-2">
+                            <tr class="prescription-item">
+                                <td class="text-center align-middle">1</td>
+                                <td>
+                                    <select class="form-control select2" name="obat[]" id="obat-0" style="width: 100%">
+                                        <option value="" hidden>Pilih Obat</option>
+                                        @foreach ($obat as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" id="jumlah-0" name="jumlah[]" value="" min="1">
+                                </td>
+                                <td>
+                                    <textarea class="form-control" name="keterangan[]" id="keterangan-0" rows="2"></textarea>
+                                </td>
+                                <td class="text-center align-middle">
                                     <button type="button" class="btn btn-sm btn-danger delete-prescription"
                                         title="Hapus item">
-                                        <i class="fas fa-trash"></i> Hapus
+                                        <i class="fas fa-trash"></i>
                                     </button>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="obat-0" class="col-sm-3 col-form-label">Obat</label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control select2" name="obat[]" id="obat-0">
-                                            <option value="" hidden>Pilih Obat</option>
-                                            @foreach ($obat as $item)
-                                                <option value="{{ $item->id }}">{{ $item->nama_obat }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="jumlah-0" class="col-sm-3 col-form-label">Jumlah</label>
-                                    <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="jumlah-0" name="jumlah[]"
-                                            value="">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="keterangan-0" class="col-sm-3 col-form-label">Keterangan</label>
-                                    <div class="col-sm-9">
-                                        <textarea class="form-control" name="keterangan[]" id="keterangan-0" cols="30" rows="10"></textarea>
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
+                                </td>
+                            </tr>
                         </template>
 
                         <div class="form-group">
@@ -196,12 +190,24 @@
             // Hitung item awal (sudah ada index 0)
             let count = container.querySelectorAll('.prescription-item').length;
 
+            // Fungsi untuk update nomor urut
+            function updateRowNumbers() {
+                const items = container.querySelectorAll('.prescription-item');
+                items.forEach((item, index) => {
+                    const numberCell = item.querySelector('td:first-child');
+                    if (numberCell) {
+                        numberCell.textContent = index + 1;
+                    }
+                });
+            }
+
             // Inisialisasi select2 pada item pertama bila belum
             if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
                 $(container).find('select.select2').each(function() {
                     if (!$(this).hasClass('select2-hidden-accessible')) {
                         $(this).select2({
-                            width: '100%'
+                            width: '100%',
+                            dropdownParent: $(this).parent()
                         });
                     }
                 });
@@ -211,9 +217,9 @@
                 if (!tpl) return;
 
                 // Buat node baru dari template yang bersih (tanpa artefak select2)
-                const wrapper = document.createElement('div');
+                const wrapper = document.createElement('tbody');
                 wrapper.innerHTML = tpl.innerHTML.trim();
-                const item = wrapper.firstElementChild; // .prescription-item
+                const item = wrapper.firstElementChild; // tr.prescription-item
 
                 // Bersihkan artefak select2 kalau ada (jaga-jaga)
                 item.querySelectorAll('.select2-container').forEach(el => el.remove());
@@ -222,7 +228,7 @@
                 const inputs = item.querySelectorAll('input');
                 const textareas = item.querySelectorAll('textarea');
 
-                // Update id/for dan kosongkan nilai
+                // Update id dan kosongkan nilai
                 selects.forEach(select => {
                     const oldId = select.id || `obat-${count}`;
                     const newId = oldId.replace(/\d+$/, count);
@@ -234,9 +240,6 @@
 
                     select.id = newId;
                     select.value = '';
-
-                    const label = item.querySelector(`label[for="${oldId}"]`);
-                    if (label) label.setAttribute('for', newId);
                 });
 
                 inputs.forEach(input => {
@@ -244,9 +247,6 @@
                     const newId = oldId.replace(/\d+$/, count);
                     input.id = newId;
                     input.value = '';
-
-                    const label = item.querySelector(`label[for="${oldId}"]`);
-                    if (label) label.setAttribute('for', newId);
                 });
 
                 textareas.forEach(textarea => {
@@ -254,17 +254,18 @@
                     const newId = oldId.replace(/\d+$/, count);
                     textarea.id = newId;
                     textarea.value = '';
-
-                    const label = item.querySelector(`label[for="${oldId}"]`);
-                    if (label) label.setAttribute('for', newId);
                 });
 
                 container.appendChild(item);
 
+                // Update nomor urut
+                updateRowNumbers();
+
                 // Inisialisasi Select2 hanya pada item baru
                 if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
                     $(item).find('select.select2').select2({
-                        width: '100%'
+                        width: '100%',
+                        dropdownParent: $(item).find('select.select2').parent()
                     });
                 }
 
@@ -303,7 +304,8 @@
                     // Re-init select2 setelah reset
                     if (typeof $ !== 'undefined' && $.fn && $.fn.select2) {
                         $(item).find('select.select2').select2({
-                            width: '100%'
+                            width: '100%',
+                            dropdownParent: $(item).find('select.select2').parent()
                         });
                     }
                     return;
@@ -318,6 +320,9 @@
                     });
                 }
                 item.remove();
+
+                // Update nomor urut setelah hapus
+                updateRowNumbers();
             });
         });
     </script>
