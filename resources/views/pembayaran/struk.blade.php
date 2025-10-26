@@ -17,15 +17,18 @@
             border-collapse: collapse;
             margin-bottom: 20px;
         }
+
         .header-table td {
             text-align: center;
             vertical-align: middle;
             padding: 10px;
         }
+
         .logo {
             width: 80px;
             height: 80px;
         }
+
         .header-text {
             font-weight: bold;
             font-size: 14px;
@@ -38,26 +41,28 @@
             margin-top: 15px;
         }
 
-        .patient-info {
+        .patient-info-table {
+            width: 100%;
+            border-collapse: collapse;
             margin: 20px 0;
         }
 
-        .info-row {
-            display: flex;
-            margin-bottom: 4px;
+        .patient-info-table td {
+            padding: 5px 8px;
+            vertical-align: top;
         }
 
-        .info-label {
+        .label-cell {
             width: 180px;
-            display: inline-block;
+            font-weight: 500;
         }
 
-        .info-separator {
+        .separator-cell {
             width: 20px;
             text-align: center;
         }
 
-        .info-value {
+        .value-cell {
             flex: 1;
         }
 
@@ -132,7 +137,7 @@
     <table class="header-table">
         <tr>
             <td style="width: 20%;">
-                <img src="{{ public_path('assets/img/logo/logo-nisbar.png') }}" width="80" alt="Logo Nias Barat">
+                <img src="{{ public_path("assets/img/logo/logo-nisbar.png") }}" width="80" alt="Logo Nias Barat">
             </td>
             <td style="width: 60%;" class="header-text">
                 <div>PEMERINTAH KABUPATEN NIAS BARAT</div>
@@ -142,79 +147,79 @@
                 <div style="font-size: 10px;">E-mail : rspratamaniasbarat@gmail.com</div>
             </td>
             <td style="width: 20%;">
-                <img src="{{ public_path('assets/img/logo/kemenkes.png') }}" width="90" alt="Logo Kemenkes">
+                <img src="{{ public_path("assets/img/logo/kemenkes.png") }}" width="90" alt="Logo Kemenkes">
             </td>
         </tr>
     </table>
 
     <div style="border-top: 3px solid black; margin: 10px 0;"></div>
 
-    <div class="patient-info">
-        <div class="info-row">
-            <span class="info-label">Tanggal Kunjungan</span>
-            <span class="info-separator">:</span>
-            <span
-                class="info-value">{{ \Carbon\Carbon::parse($pembayaran->rawatJalan->tanggal_kunjungan)->format("d-m-Y") }}</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Nama Pasien</span>
-            <span class="info-separator">:</span>
-            <span class="info-value">{{ $pembayaran->rawatJalan->pasien->nama }}</span>
-        </div>
+    <table class="patient-info-table">
+        <tr>
+            <td class="label-cell">Tanggal Kunjungan</td>
+            <td class="separator-cell">:</td>
+            <td class="value-cell">
+                {{ \Carbon\Carbon::parse($pembayaran->rawatJalan->tanggal_kunjungan)->format("d-m-Y") }}</td>
+        </tr>
+        <tr>
+            <td class="label-cell">Nama Pasien</td>
+            <td class="separator-cell">:</td>
+            <td class="value-cell">{{ $pembayaran->rawatJalan->pasien->nama }}</td>
+        </tr>
         @if ($pembayaran->rawatJalan->pasien->nik)
-            <div class="info-row">
-                <span class="info-label">NIK</span>
-                <span class="info-separator">:</span>
-                <span class="info-value">{{ $pembayaran->rawatJalan->pasien->nik }}</span>
-            </div>
+            <tr>
+                <td class="label-cell">NIK</td>
+                <td class="separator-cell">:</td>
+                <td class="value-cell">{{ $pembayaran->rawatJalan->pasien->nik }}</td>
+            </tr>
         @endif
         @if ($pembayaran->rawatJalan->pasien->no_bpjs)
-            <div class="info-row">
-                <span class="info-label">No. BPJS</span>
-                <span class="info-separator">:</span>
-                <span class="info-value">{{ $pembayaran->rawatJalan->pasien->no_bpjs }}</span>
-            </div>
+            <tr>
+                <td class="label-cell">No. BPJS</td>
+                <td class="separator-cell">:</td>
+                <td class="value-cell">{{ $pembayaran->rawatJalan->pasien->no_bpjs }}</td>
+            </tr>
         @endif
-        <div class="info-row">
-            <span class="info-label">Jenis Kelamin</span>
-            <span class="info-separator">:</span>
-            <span
-                class="info-value">{{ $pembayaran->rawatJalan->pasien->jenis_kelamin == "L" ? "Laki-laki" : "Perempuan" }}</span>
-        </div>
+        <tr>
+            <td class="label-cell">Jenis Kelamin</td>
+            <td class="separator-cell">:</td>
+            <td class="value-cell">
+                {{ $pembayaran->rawatJalan->pasien->jenis_kelamin == "L" ? "Laki-laki" : "Perempuan" }}</td>
+        </tr>
         @if ($pembayaran->rawatJalan->pasien->tanggal_lahir)
-            <div class="info-row">
-                <span class="info-label">Tanggal Lahir / Umur</span>
-                <span class="info-separator">:</span>
-                <span
-                    class="info-value">{{ \Carbon\Carbon::parse($pembayaran->rawatJalan->pasien->tanggal_lahir)->format("d-m-Y") }}
-                    / {{ \Carbon\Carbon::parse($pembayaran->rawatJalan->pasien->tanggal_lahir)->age }} Tahun</span>
-            </div>
+            <tr>
+                <td class="label-cell">Tanggal Lahir / Umur</td>
+                <td class="separator-cell">:</td>
+                <td class="value-cell">
+                    {{ \Carbon\Carbon::parse($pembayaran->rawatJalan->pasien->tanggal_lahir)->format("d-m-Y") }}
+                    / {{ \Carbon\Carbon::parse($pembayaran->rawatJalan->pasien->tanggal_lahir)->age }} Tahun</td>
+            </tr>
         @endif
         @if ($pembayaran->rawatJalan->pasien->alamat)
-            <div class="info-row">
-                <span class="info-label">Alamat</span>
-                <span class="info-separator">:</span>
-                <span class="info-value">{{ $pembayaran->rawatJalan->pasien->alamat }}</span>
-            </div>
+            <tr>
+                <td class="label-cell">Alamat</td>
+                <td class="separator-cell">:</td>
+                <td class="value-cell">{{ $pembayaran->rawatJalan->pasien->alamat }}</td>
+            </tr>
         @endif
-        <div class="info-row">
-            <span class="info-label">Poli</span>
-            <span class="info-separator">:</span>
-            <span class="info-value">{{ $pembayaran->rawatJalan->poli->nama_poli }}</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Dokter</span>
-            <span class="info-separator">:</span>
-            <span class="info-value">{{ $pembayaran->rawatJalan->dokter->nama }}</span>
-        </div>
+        <tr>
+            <td class="label-cell">Poli</td>
+            <td class="separator-cell">:</td>
+            <td class="value-cell">{{ $pembayaran->rawatJalan->poli->nama_poli }}</td>
+        </tr>
+        <tr>
+            <td class="label-cell">Dokter</td>
+            <td class="separator-cell">:</td>
+            <td class="value-cell">{{ $pembayaran->rawatJalan->dokter->nama }}</td>
+        </tr>
         @if ($pembayaran->rawatJalan->riwayatPemeriksaan)
-            <div class="info-row">
-                <span class="info-label">Diagnosa</span>
-                <span class="info-separator">:</span>
-                <span class="info-value">{{ $pembayaran->rawatJalan->riwayatPemeriksaan->diagnosa ?? "-" }}</span>
-            </div>
+            <tr>
+                <td class="label-cell">Diagnosa</td>
+                <td class="separator-cell">:</td>
+                <td class="value-cell">{{ $pembayaran->rawatJalan->riwayatPemeriksaan->diagnosa ?? "-" }}</td>
+            </tr>
         @endif
-    </div>
+    </table>
 
     @if ($pembayaran->rawatJalan->resepObat->count() > 0)
         <div class="medicine-section">
