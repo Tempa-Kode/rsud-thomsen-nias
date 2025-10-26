@@ -37,6 +37,7 @@ Route::prefix('rawat-jalan')->middleware(['auth', 'profilePasien'])->group(funct
     Route::get('/halaman-pendaftaran', [\App\Http\Controllers\RawatJalanController::class, 'halamanPendaftaran'])->name('rawat-jalan.halaman-pendaftaran');
     Route::get('/download-report', [\App\Http\Controllers\RawatJalanController::class, 'downloadReport'])->name('rawat-jalan.download-report');
     Route::post('/daftar', [\App\Http\Controllers\RawatJalanController::class, 'daftar'])->name('rawat-jalan.daftar');
+    Route::put('/validasi-pendaftaran/{id}', [\App\Http\Controllers\RawatJalanController::class, 'validasiPendaftaran'])->name('rawat-jalan.validasi-pendaftaran');
 });
 
 Route::prefix('riwayat-pemeriksaan')->middleware(['auth'])->group(function () {

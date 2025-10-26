@@ -13,7 +13,7 @@ class RawatJalanPolicy
      */
     public function viewAny(User $user): Response
     {
-        return $user->role == 'pasien' || $user->role == 'dokter' || $user->role == 'kasir' || $user->role == 'pimpinan'
+        return $user->role == 'pasien' || $user->role == 'dokter' || $user->role == 'kasir' || $user->role == 'pimpinan' || $user->role == 'superadmin'
             ? Response::allow()
             : Response::deny('anda tidak memiliki akses untuk melihat data rawat jalan.');
     }
@@ -41,6 +41,13 @@ class RawatJalanPolicy
         return $user->role === 'kasir' || $user->role == 'pimpinan'|| $user->role == 'dokter'
             ? Response::allow()
             : Response::deny('anda tidak memiliki akses untuk mendownload data rawat jalan.');
+    }
+
+    public function validasiPendaftaran(User $user, RawatJalan $rawatJalan): Response
+    {
+        return $user->role === 'superadmin' && $rawatJalan->status == 'validasi'
+            ? Response::allow()
+            : Response::deny('anda tidak memiliki akses untuk melakukan validasi pendaftaran rawat jalan.');
     }
 
     /**

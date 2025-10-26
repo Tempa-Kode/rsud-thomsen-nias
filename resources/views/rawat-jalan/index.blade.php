@@ -133,7 +133,15 @@
                                     </td>
                                     @if(Auth::user()->role != 'pasien' && Auth::user()->role != 'kasir' && Auth::user()->role != 'pimpinan')
                                     <td>
-                                        @if ($item->status === 'menunggu')
+                                        @if ($item->status === 'validasi')
+                                            @can('validasiPendaftaran', $item)
+                                                <form action="{{ route('rawat-jalan.validasi-pendaftaran', $item->id) }}" method="post" class="d-inline">
+                                                    @csrf
+                                                    @method('put')
+                                                    <button type="submit" class="btn btn-primary">Teruskan Ke Pendaftaran</button>
+                                                </form>
+                                            @endcan
+                                        @elseif($item->status === 'menunggu' && Auth::user()->role === 'dokter')
                                             <a href="{{ route('riwayat-pemeriksaan.periksa', $item->id) }}" class="btn btn-success">Periksa</a>
                                         @else
                                             <span class="text-muted">Tidak ada aksi</span>

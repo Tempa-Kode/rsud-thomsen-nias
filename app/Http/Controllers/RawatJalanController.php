@@ -32,6 +32,7 @@ class RawatJalanController extends Controller
                 // ->poli($queryPoli)
                 ->with('dokter', 'pasien', 'poli')
                 ->orderBy('id', 'desc')
+                ->where('status', '!=', 'validasi')
                 ->get();
                 $poli = Poli::all();
             return view('rawat-jalan.index', compact('rawatJalan', 'poli'));
@@ -74,19 +75,34 @@ class RawatJalanController extends Controller
 
         DB::beginTransaction();
         try {
-            $hariIni = $validasi['tanggal_kunjungan'];
-            $antrianTerakhir = RawatJalan::where('poli_id', $validasi['poli_id'])
+            $validasi['status'] = 'validasi';
+            RawatJalan::create($validasi);
+            DB::commit();
+            return redirect()->route('rawat-jalan.index')->with('success', "Pendaftaran berhasil dilakukan, menunggu konfirmasi admin.");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['error' => 'gagal melakukan pendaftaran, silahkan coba lagi.'. $e->getMessage()]);
+        }
+    }
+
+    public function validasiPendaftaran(Request $request, $id)
+    {
+        // Gate::authorize('validasiPendaftaran', $rawatJalan);
+        DB::beginTransaction();
+        try {
+            $rawatJalan = RawatJalan::findOrFail($id);
+            $hariIni = $rawatJalan->tanggal_kunjungan;
+            $antrianTerakhir = RawatJalan::where('poli_id', $rawatJalan->poli_id)
                 ->whereDate('tanggal_kunjungan', $hariIni)
                 ->orderByDesc('nomor_antrian')
                 ->value('nomor_antrian');
-            $validasi['nomor_antrian'] = $antrianTerakhir ? $antrianTerakhir + 1 : 1;
-            $validasi['status'] = 'menunggu';
-            RawatJalan::create($validasi);
+            $nomorAntrian = $antrianTerakhir ? $antrianTerakhir + 1 : 1;
+            $rawatJalan->update(['status' => 'menunggu', 'nomor_antrian' => $nomorAntrian]);
             DB::commit();
-            return redirect()->route('rawat-jalan.index')->with('success', "Pendaftaran berhasil dilakukan, nomor antrian Anda adalah {$validasi['nomor_antrian']}.");
+            return redirect()->route('rawat-jalan.index')->with('success', "Pendaftaran berhasil divalidasi.");
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['error' => 'gagal melakukan pendaftaran, silahkan coba lagi.']);
+            return redirect()->back()->withErrors(['error' => 'gagal melakukan validasi pendaftaran, silahkan coba lagi.'. $e->getMessage()]);
         }
     }
 
