@@ -73,11 +73,13 @@
                                         <tr class="rx-item">
                                             <td class="text-center align-middle">{{ $idx + 1 }}</td>
                                             <td>
-                                                <select class="form-control select2" id="obat-{{ $idx }}" name="obat[]" style="width: 100%">
+                                                <select class="form-control select2" id="obat-{{ $idx }}"
+                                                    name="obat[]" style="width: 100%">
                                                     <option value="" hidden>Pilih Obat</option>
                                                     @foreach ($obat as $o)
                                                         <option value="{{ $o->id }}"
-                                                            {{ $o->id == $r->obat_id ? "selected" : "" }}>{{ $o->nama_obat }}
+                                                            {{ $o->id == $r->obat_id ? "selected" : "" }}>
+                                                            {{ $o->nama_obat }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -90,7 +92,8 @@
                                                 <textarea class="form-control" id="ket-{{ $idx }}" name="keterangan[]" rows="2">{{ $r->keterangan }}</textarea>
                                             </td>
                                             <td class="text-center align-middle">
-                                                <button type="button" class="btn btn-sm btn-danger rx-delete" title="Hapus item">
+                                                <button type="button" class="btn btn-sm btn-danger rx-delete"
+                                                    title="Hapus item">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </td>
@@ -100,7 +103,8 @@
                                         <tr class="rx-item">
                                             <td class="text-center align-middle">1</td>
                                             <td>
-                                                <select class="form-control select2" id="obat-0" name="obat[]" style="width: 100%">
+                                                <select class="form-control select2" id="obat-0" name="obat[]"
+                                                    style="width: 100%">
                                                     <option value="" hidden>Pilih Obat</option>
                                                     @foreach ($obat as $o)
                                                         <option value="{{ $o->id }}">{{ $o->nama_obat }}</option>
@@ -108,13 +112,15 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control" id="jumlah-0" name="jumlah[]" value="" min="1">
+                                                <input type="number" class="form-control" id="jumlah-0" name="jumlah[]"
+                                                    value="" min="1">
                                             </td>
                                             <td>
                                                 <textarea class="form-control" id="ket-0" name="keterangan[]" rows="2"></textarea>
                                             </td>
                                             <td class="text-center align-middle">
-                                                <button type="button" class="btn btn-sm btn-danger rx-delete" title="Hapus item">
+                                                <button type="button" class="btn btn-sm btn-danger rx-delete"
+                                                    title="Hapus item">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </td>
@@ -195,10 +201,10 @@
         </tr>`;
 
                 const item = wrap.firstElementChild;
-                
+
                 // Bersihkan artefak select2 kalau ada
                 item.querySelectorAll('.select2-container').forEach(el => el.remove());
-                
+
                 container.appendChild(item);
 
                 // Update nomor urut
@@ -246,7 +252,7 @@
                     });
                 }
                 item.remove();
-                
+
                 // Update nomor urut setelah hapus
                 updateRowNumbers();
             });
