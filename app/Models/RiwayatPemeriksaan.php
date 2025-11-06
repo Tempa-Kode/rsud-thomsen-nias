@@ -12,6 +12,7 @@ class RiwayatPemeriksaan extends Model
         'penyakit',
         'diagnosa',
         'biaya_pemeriksaan',
+        'ambil_obat',
     ];
     public $timestamps = false;
 

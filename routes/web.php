@@ -52,6 +52,7 @@ Route::prefix('riwayat-pemeriksaan')->middleware(['auth'])->group(function () {
 Route::prefix('resep-obat')->middleware(['auth'])->group(function () {
     Route::get('/', [\App\Http\Controllers\ResepObatController::class, 'index'])->name('resep-obat.index');
     Route::get('/{id}', [\App\Http\Controllers\ResepObatController::class, 'show'])->name('resep-obat.show');
+    Route::put('/update-status-pengambilan/{id}', [\App\Http\Controllers\ResepObatController::class, 'updateStatusPengambilan'])->name('resep-obat.update-status-pengambilan');
 });
 
 Route::prefix('pembayaran')->middleware(['auth'])->group(function () {

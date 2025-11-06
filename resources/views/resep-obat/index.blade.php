@@ -30,6 +30,7 @@
                                     <th>Dokter</th>
                                     <th>Jumlah Obat</th>
                                     <th>Total Harga</th>
+                                    <th>Status Pengambilan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -46,6 +47,12 @@
                                         <td>{{ $item->dokter->nama ?? '-' }}</td>
                                         <td>{{ $item->resepObat->count() }} jenis obat</td>
                                         <td>Rp {{ number_format($item->resepObat->sum(function($resep) { return $resep->obat->harga * $resep->jumlah; }), 0, ',', '.') }}</td>
+                                        <td>
+                                            @if ($item->riwayatPemeriksaan->ambil_obat == 1)
+                                                <span class="badge badge-success">Sudah Diambil</span>
+                                            @else
+                                                <span class="badge badge-warning">Belum Diambil</span>
+                                            @endif
                                         <td>
                                             <a href="{{ route('resep-obat.show', $item->id) }}"
                                                class="btn btn-sm btn-primary">

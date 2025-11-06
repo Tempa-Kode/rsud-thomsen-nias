@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ResepObat;
 use App\Models\RawatJalan;
+use App\Models\RiwayatPemeriksaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,7 @@ class ResepObatController extends Controller
 
     public function show($id)
     {
-        $rawatJalan = RawatJalan::with(['pasien', 'dokter', 'poli', 'riwayatPemeriksaan', 'resepObat.obat'])
+        $rawatJalan = RawatJalan::with(['pasien', 'dokter', 'poli', 'riwayatPemeriksaan', 'resepObat.obat', 'pembayaran'])
             ->findOrFail($id);
 
         // Authorization check
@@ -39,5 +40,15 @@ class ResepObatController extends Controller
         }
 
         return view('resep-obat.show', compact('rawatJalan'));
+    }
+
+    public function updateStatusPengambilan($id)
+    {
+        $riwayatPemeriksaan = RiwayatPemeriksaan::where('id', $id)->first();
+        $riwayatPemeriksaan->ambil_obat = true;
+        $riwayatPemeriksaan->save();
+
+        return redirect()->route('resep-obat.show', $riwayatPemeriksaan->rawat_jalan_id)
+                         ->with('success', 'Status pengambilan obat berhasil diperbarui.');
     }
 }
