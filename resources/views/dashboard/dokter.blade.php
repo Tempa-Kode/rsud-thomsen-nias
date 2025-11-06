@@ -11,7 +11,22 @@
     })->count();
 @endphp
 
+@if ($pasienMenunggu > 0)
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-info alert-has-icon">
+                <div class="alert-icon"><i class="fas fa-info-circle"></i></div>
+                <div class="alert-body">
+                    <div class="alert-title">Ada Pasien Menunggu!</div>
+                    Anda memiliki {{ $pasienMenunggu }} pasien yang sedang menunggu untuk diperiksa.
+                    <a href="{{ route("rawat-jalan.index") }}" class="alert-link">Lihat sekarang</a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 <div class="row">
+
     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
         <div class="card card-statistic-1">
             <div class="card-icon bg-primary">
@@ -161,18 +176,3 @@
         </div>
     </div>
 </div>
-
-@if ($pasienMenunggu > 0)
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-info alert-has-icon">
-                <div class="alert-icon"><i class="fas fa-info-circle"></i></div>
-                <div class="alert-body">
-                    <div class="alert-title">Ada Pasien Menunggu!</div>
-                    Anda memiliki {{ $pasienMenunggu }} pasien yang sedang menunggu untuk diperiksa.
-                    <a href="{{ route("rawat-jalan.index") }}" class="alert-link">Lihat sekarang</a>
-                </div>
-            </div>
-        </div>
-    </div>
-@endif
