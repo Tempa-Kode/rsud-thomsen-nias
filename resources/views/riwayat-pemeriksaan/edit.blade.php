@@ -34,16 +34,16 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Diagnosa</label>
+                            <div class="col-sm-9">
+                                <textarea name="diagnosa" class="form-control" rows="4">{{ old("diagnosa", $pemeriksaan->diagnosa) }}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Penyakit</label>
                             <div class="col-sm-9">
                                 <input type="text" name="penyakit" class="form-control"
                                     value="{{ old("penyakit", $pemeriksaan->penyakit) }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Diagnosa</label>
-                            <div class="col-sm-9">
-                                <textarea name="diagnosa" class="form-control" rows="4">{{ old("diagnosa", $pemeriksaan->diagnosa) }}</textarea>
                             </div>
                         </div>
                         <div class="form-group row">
