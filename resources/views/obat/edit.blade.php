@@ -61,7 +61,14 @@
                         </div>
                         <div class="form-group">
                             <label for="satuan">Satuan Obat</label>
-                            <input type="text" class="form-control @error('satuan') is-invalid @enderror" id="satuan" name="satuan" value="{{ old('satuan', $obat->satuan) }}" required>
+                            {{-- <input type="text" class="form-control @error('satuan') is-invalid @enderror" id="satuan" name="satuan" value="{{ old('satuan', $obat->satuan) }}" required> --}}
+                            <select name="satuan" id="satuan" class="form-control @error('satuan') is-invalid @enderror" required>
+                                <option value="" disabled>Pilih Satuan</option>
+                                <option value="Tablet" {{ old('satuan', $obat->satuan) == 'Tablet' ? 'selected' : '' }}>Tablet</option>
+                                <option value="Kapsul" {{ old('satuan', $obat->satuan) == 'Kapsul' ? 'selected' : '' }}>Kapsul</option>
+                                <option value="Botol" {{ old('satuan', $obat->satuan) == 'Botol' ? 'selected' : '' }}>Botol</option>
+                                <option value="Sirup" {{ old('satuan', $obat->satuan) == 'Sirup' ? 'selected' : '' }}>Sirup</option>
+                            </select>
                             @error('satuan')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
