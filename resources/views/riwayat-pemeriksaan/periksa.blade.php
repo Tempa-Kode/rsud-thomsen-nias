@@ -75,13 +75,6 @@
                         @method("POST")
                         <input type="hidden" name="rawat_jalan_id" value="{{ $data->id }}">
                         <div class="form-group row">
-                            <label for="penyakit" class="col-sm-3 col-form-label">Penyakit</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="penyakit" name="penyakit"
-                                    value="{{ old("penyakit") }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label for="diagnosa" class="col-sm-3 col-form-label">Diagnosa</label>
                             <div class="col-sm-9">
                                 <textarea class="form-control" name="diagnosa" id="diagnosa" cols="30" rows="10" name="diagnosa">
@@ -90,10 +83,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="biaya_pemeriksaan" class="col-sm-3 col-form-label">Biaya Pemeriksaan</label>
+                            <label for="penyakit" class="col-sm-3 col-form-label">Penyakit</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="biaya_pemeriksaan" name="biaya_pemeriksaan"
-                                    value="{{ old("biaya_pemeriksaan") }}">
+                                <input type="text" class="form-control" id="penyakit" name="penyakit"
+                                    value="{{ old("penyakit") }}">
                             </div>
                         </div>
                         <hr>
@@ -171,6 +164,14 @@
                             <button type="button" id="add-prescription" class="btn btn-info mb-3">
                                 <i class="fas fa-plus"></i> Tambah Resep Obat
                             </button>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="biaya_pemeriksaan" class="col-sm-3 col-form-label">Biaya Pemeriksaan</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="biaya_pemeriksaan" name="biaya_pemeriksaan"
+                                    value="{{ old("biaya_pemeriksaan") }}">
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-outline-primary w-100">Simpan Pemeriksaan</button>
                     </form>
