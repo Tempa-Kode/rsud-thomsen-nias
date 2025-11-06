@@ -64,9 +64,7 @@
                     <div class="form-group row">
                         <label for="dokter" class="col-sm-3 col-form-label">Keluhan</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control" name="deskripsi_keluhan" id="deskripsi_keluhan" cols="30" rows="10" readonly>
-                                {{ $data->deskripsi_keluhan ?? "-" }}
-                            </textarea>
+                            <textarea class="form-control" name="deskripsi_keluhan" id="deskripsi_keluhan" cols="30" rows="10" readonly>{{ $data->deskripsi_keluhan ?? "-" }}</textarea>
                         </div>
                     </div>
                     <hr>
@@ -77,9 +75,7 @@
                         <div class="form-group row">
                             <label for="diagnosa" class="col-sm-3 col-form-label">Diagnosa</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" name="diagnosa" id="diagnosa" cols="30" rows="10" name="diagnosa">
-                                    {{ old("diagnosa") }}
-                                </textarea>
+                                <textarea class="form-control" name="diagnosa" id="diagnosa" cols="30" rows="10" name="diagnosa">{{ old("diagnosa") }}</textarea>
                             </div>
                         </div>
                         <div class="form-group row">

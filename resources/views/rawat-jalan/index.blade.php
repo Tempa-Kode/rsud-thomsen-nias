@@ -141,7 +141,7 @@
                                                     <button type="submit" class="btn btn-primary">Teruskan Ke Pendaftaran</button>
                                                 </form>
                                             @endcan
-                                        @elseif($item->status === 'menunggu' && Auth::user()->role === 'dokter')
+                                        @elseif($item->status === 'menunggu' || $item->status === 'dalam_perawatan'  && Auth::user()->role === 'dokter')
                                             <a href="{{ route('riwayat-pemeriksaan.periksa', $item->id) }}" class="btn btn-success">Periksa</a>
                                         @else
                                             <span class="text-muted">Tidak ada aksi</span>
