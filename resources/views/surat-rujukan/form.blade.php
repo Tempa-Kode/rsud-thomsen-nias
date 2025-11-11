@@ -59,7 +59,8 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tujuan</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="tujuan" id="tujuan" value="{{ old('tujuan') }}" required placeholder="Direktur RS . . . .">
+                                <select class="form-control select2" name="tujuan" id="tujuan">
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -75,3 +76,94 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        // Pastikan DOM sudah dimuat sepenuhnya
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const selectTujuan = document.getElementById('tujuan');
+            const inputAlamat = document.getElementById('alamat_tujuan');
+
+            // Simpan data RS dalam variabel agar mudah diakses
+            let dataRumahSakit = [];
+
+            // 1. Fungsi untuk mengambil data dari API (via server Laravel kita)
+            async function fetchRumahSakit() {
+                try {
+                    // Panggil route yang sudah kita buat di Laravel
+                    const response = await fetch("{{ url('/api/get-rumah-sakit') }}");
+
+                    if (!response.ok) {
+                        throw new Error('Gagal mengambil data Faskes');
+                    }
+
+                    const result = await response.json();
+
+                    // Simpan data ke variabel
+                    dataRumahSakit = result.data || [];
+
+                    // 2. Panggil fungsi untuk mengisi dropdown
+                    populateDropdown();
+
+                } catch (error) {
+                    console.error(error);
+                    // Tampilkan error di dropdown
+                    selectTujuan.innerHTML = '<option value="">Gagal memuat data</option>';
+                }
+            }
+
+            // 2. Fungsi untuk mengisi dropdown
+            function populateDropdown() {
+                // Kosongkan opsi 'RS 1, RS 2' yang lama
+                selectTujuan.innerHTML = '';
+
+                // Tambahkan opsi default
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = '-- Pilih Tujuan Rujukan --';
+                selectTujuan.appendChild(defaultOption);
+
+                // Isi dropdown dengan data dari API
+                dataRumahSakit.forEach(rs => {
+                    const option = document.createElement('option');
+                    option.value = rs.nama; // Gunakan 'nama' sebagai value
+                    option.textContent = rs.nama; // Teks yang ditampilkan
+
+                    // SIMPAN ALAMAT di data attribute
+                    // Ini adalah kunci untuk mengambil alamat nanti
+                    option.setAttribute('data-alamat', rs.alamat);
+
+                    selectTujuan.appendChild(option);
+                });
+            }
+
+            // 3. Tambahkan event listener untuk 'change' pada dropdown
+            $('#tujuan').on('select2:select', function(e) {
+                // 'select2:select' adalah event khusus dari select2 saat memilih
+
+                // Ambil data dari elemen <option> yang dipilih
+                const selectedOptionElement = e.params.data.element;
+
+                if (selectedOptionElement) {
+                    // Ambil data-alamat yang kita simpan
+                    // Kita pakai .attr() karena kita set via setAttribute
+                    const alamat = $(selectedOptionElement).attr('data-alamat');
+
+                    // Masukkan ke input
+                    inputAlamat.value = alamat || '';
+                } else {
+                    inputAlamat.value = '';
+                }
+            });
+
+            $('#tujuan').on('select2:unselect', function(e) {
+                inputAlamat.value = '';
+            });
+
+            // Panggil fungsi utama saat halaman dimuat
+            fetchRumahSakit();
+
+        });
+    </script>
+@endpush
