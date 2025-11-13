@@ -63,12 +63,12 @@
                         </div>
                     @else
                         <div class="form-group">
-                            <label>Penyakit</label>
-                            <input class="form-control" value="{{ $pemeriksaan->penyakit }}" readonly>
-                        </div>
-                        <div class="form-group">
                             <label>Diagnosa</label>
                             <textarea class="form-control" rows="4" readonly>{{ $pemeriksaan->diagnosa }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Penyakit</label>
+                            <input class="form-control" value="{{ $pemeriksaan->penyakit }}" readonly>
                         </div>
                         <hr>
                         <h5>Resep Obat</h5>
